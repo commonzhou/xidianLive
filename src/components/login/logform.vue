@@ -1,0 +1,132 @@
+<template>
+  <div>
+    <div id="subtitle">登  陆</div>
+<el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="30px" class="demo-ruleForm form"  size="medium ">
+  <el-form-item  prop="name" class="item item1">
+    <el-input  v-model="ruleForm2.name" auto-complete="off" placeholder="账号/邮箱/手机号"></el-input>
+  </el-form-item>
+  <el-form-item  prop="pass" class="item">
+    <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"></el-input>
+  </el-form-item>
+  <div id="check">
+      <el-checkbox v-model="checked" class="check" >自动登陆 </el-checkbox>
+      <span class="password">忘记密码</span>
+  </div>
+  <el-form-item class="buttontotal">
+    <el-button type="primary" @click="submitForm('ruleForm2')" class="buttons">登陆</el-button>
+    <el-button @click="resetForm('ruleForm2')" class="buttons">重置</el-button>
+  </el-form-item>
+</el-form>  
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+// import axios from 'axios'
+// import qs from 'qs'
+// axios.defaults.timeout=5000;
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';  
+// axios.defaults.baseURL='http://118.89.112.125/xidianlive';
+import LogReg from 'store/LogReg.js'
+  export default {
+    data() {
+      return {
+        ruleForm2: {
+          name: '',
+          pass: '',
+        },
+        rules2: {
+          name: [
+             { required: true, message: '请输入用户名', trigger: 'blur' },
+             { min: 11, max: 11, message: '长度11个字符', trigger: 'blur' }
+          ],
+          pass: [
+             { required: true, message: '请输入密码', trigger: 'blur' },
+             { min: 6, max: 12,message: '请输入6-12位密码', trigger: 'blur' }
+          ]
+        }
+      };
+    },
+    methods: {
+      submitForm(formName) {
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+             LogReg.postlogin({
+               "userName":this.ruleForm2.name,
+               "password":this.ruleForm2.pass
+             }).then(
+                function(res){
+                console.log(res);
+                if(res.data.retureValue==0){
+                   window.location.href="/#/newmain";
+                }
+                else{
+                  alert("sb，用户名或者密码不对啊")
+                }
+                }
+             ).catch(function(err){
+               console.log(err);
+             })
+           
+            // axios.post('/user/login',qs.stringify({
+            //   userName:this.ruleForm2.name,
+            //   password:this.ruleForm2.pass
+            // })).then(
+            //   function(res){console.log(res);
+            //    window.location.href="/#/newmain";
+            //   }  
+            // ).catch(function(err){
+            //   console.log(err);
+            // });
+           
+          } else {
+            console.log('error submit!!');
+            return false;
+          }
+        });
+      },
+      resetForm(formName) {
+        this.$refs[formName].resetFields();
+      }
+    }
+  }
+</script>
+<style scoped lang="stylus" rel="stylesheet/stylus">
+   .form
+     border:2px solid #00896C
+     width:40%
+     height:22rem
+     margin:2rem auto
+     margin-bottom:8rem
+     .item
+       width:60%
+       margin:0 auto
+       margin-top:1.6rem
+     .item1
+       margin-top:3.5rem
+     ::-webkit-input-placeholder
+       color:#91989F
+     :-moz-placeholder
+       color:#91989F
+     ::-moz-placeholder
+       color:#91989F
+     :-ms-input-placeholder
+       color:#91989F
+     .buttontotal
+      margin:0 auto
+      margin-top:2rem
+      .buttons
+        color:white
+        background-color:#00896C
+        width:18%
+     #check 
+        width:55%
+        font-size:0.9rem
+        margin:1.6rem 0rem 2rem 9.5rem
+        .check
+          margin:0 10rem 0 -1rem
+  #subtitle
+    margin:0 auto
+    margin-top:9rem
+    color:#00896C
+    font-size:2rem
+</style>
