@@ -12,7 +12,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Tab from 'components/tab/tab'
+import Tab from 'components/common/tab'
 import Swipe from 'components/swipe/swipe'
 import Threecolumn from 'components/threecolumn/threecolumn'
 import leftright from 'components/mainpageleftright/mainpageleftright'
