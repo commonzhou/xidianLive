@@ -1,13 +1,11 @@
 <template>
   <div>
-    <Tab></Tab>
     <Form></Form>
-    <Foot></Foot>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import Tab from 'components/tab/tab'
+import Tab from 'components/common/tab'
 import Form from 'components/register/registerform'
 import Foot from 'components/footer/footer'
     export default{

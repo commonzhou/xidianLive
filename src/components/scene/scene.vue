@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Tab from 'components/tab/tab'
+import Tab from 'components/common/tab'
 import Foot from 'components/footer/footer'
 import threecolumn from 'components/scenethreecolumn/scenethreecolumn'
     export default{

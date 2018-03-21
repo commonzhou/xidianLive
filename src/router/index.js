@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import main from 'components/main/main'
+import Index from 'containers/index'
+import main from 'containers/main/main'
 import scene from 'components/scene/scene'
 import purchase from 'components/purchase/purchase'
 import livecase from 'components/livecase/livecase'
@@ -27,38 +28,16 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'main',
-      component: main
-    },
-    {
-      path:'/main',
-      name:'main',
-      component:main
-    },
-    {
-      path:'/scene',
-      name:'scene',
-      component:scene
-    },
-    {
-      path:'/purchase',
-      name:'purchase',
-      component:purchase
-    },
-    {
-      path:'/livecase',
-      name:'livecase',
-      component:livecase
-    },
-    {
-      path:'/register',
-      name:'register',
-      component:register
-    },
-    {
-      path:'/login',
-      name:'login',
-      component:login
+      component: Index,
+      name: 'index',
+      redirect: '/main',
+      children: [
+        {path: 'main', component: main},
+        {path: 'purchase', component: purchase},
+        {path: 'livecase', name: 'livecase', component: livecase},
+        {path: 'register', name: 'register', component: register},
+        {path: 'login', name:"login",component:login}
+      ]
     },
     {
       path:'/newbuild',

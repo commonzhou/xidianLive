@@ -4,21 +4,18 @@
 </template>
 
 <script type="text/ecmascript-6">
+
     export default{
-      name:'purchase',
+      data(){
+           return{
+           }
+       },
       components:{
+        
       }
     }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-     .image 
-      width:100%
-      position:relative
-      margin:0 -10px
-      top:-5rem
-      zoom:1
-      img 
-        max-width:95rem
-        height:30rem
+  
 </style>

@@ -1,20 +1,23 @@
 <template>
   <div>
-    <Tab></Tab>
-    <div class="image">
+    <!-- <div class="image">
       <img src="~assets/imgs/back02.jpg">
     </div>
-    <livecolumn></livecolumn>
-    <Foot></Foot>
+    <livecolumn></livecolumn> -->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
- import Tab from 'components/tab/tab'
+ import Tab from 'components/common/tab'
  import Foot from 'components/footer/footer'
  import livecolumn from 'components/livecasecolumn/livecasecolumn'
     export default{
-      name:'livecase',
+      data(){
+           return{
+            user:{},
+            choosePage:1
+           }
+       },
       components:{
         Tab,
         Foot,

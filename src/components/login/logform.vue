@@ -3,7 +3,7 @@
     <div id="subtitle">登  陆</div>
 <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="30px" class="demo-ruleForm form"  size="medium ">
   <el-form-item  prop="name" class="item item1">
-    <el-input  v-model="ruleForm2.name" auto-complete="off" placeholder="账号/邮箱/手机号"></el-input>
+    <el-input  v-model="ruleForm2.name" auto-complete="off" placeholder="手机号"></el-input>
   </el-form-item>
   <el-form-item  prop="pass" class="item">
     <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"></el-input>
@@ -14,7 +14,7 @@
   </div>
   <el-form-item class="buttontotal">
     <el-button type="primary" @click="submitForm('ruleForm2')" class="buttons">登陆</el-button>
-    <el-button @click="resetForm('ruleForm2')" class="buttons">重置</el-button>
+    <el-button @click="resetForm('ruleForm2')" class="buttons">注册</el-button>
   </el-form-item>
 </el-form>  
   </div>
@@ -30,6 +30,7 @@ import LogReg from 'store/LogReg.js'
   export default {
     data() {
       return {
+        checked:'',
         ruleForm2: {
           name: '',
           pass: '',
@@ -117,13 +118,14 @@ import LogReg from 'store/LogReg.js'
       .buttons
         color:white
         background-color:#00896C
-        width:18%
+        width:10vw
      #check 
-        width:55%
+        width:80%
         font-size:0.9rem
         margin:1.6rem 0rem 2rem 9.5rem
+        margin-left:4vw
         .check
-          margin:0 10rem 0 -1rem
+          margin-right 6vw
   #subtitle
     margin:0 auto
     margin-top:9rem

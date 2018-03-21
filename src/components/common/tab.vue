@@ -1,18 +1,18 @@
 <template>
   <div class="header-box">
     <div>
-        <header class="h">
+        <header class="h-box">
           <div class="h-logo">
-              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)">学术直播</router-link>
+              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">学术直播</router-link>
           </div>
           <div class="h-sub">
-             <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)">首页</router-link>
-             <router-link tag='div' class="tab-item" to="/livecase" @click="changePage(2)">直播案例</router-link>
-             <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(3)">视频中心</router-link>
+             <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link>
+             <router-link tag='div' class="tab-item" to="/livecase" @click="changePage(2)" :class="{active:choosePage===2}">直播案例</router-link>
+             <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(3)" :class="{active:choosePage===3}">视频中心</router-link>
           </div>
           <div class="h-aside">
-             <router-link tag='div' class="tab-item" to="/login" @click="changePage(4)">登陆</router-link>
-             <router-link tag='div' class="tab-item" to="/purchase" @click="changePage(5)">购买</router-link> 
+             <router-link tag='div' class="tab-item person" to="/login" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
+             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
           </div>
         </header>
     </div>
@@ -56,38 +56,64 @@
     }
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
-   .tab 
-     display:flex
-     width:100%
-     height:5rem
-     line-height:5rem
-     border:1px solid black
-     background:rgba(0,0,0,0.7)
-     position:absolute
-     top:0
-     left:0
-     right:0
-     margin:auto
-     overflow hidden
-     z-index:11
-     .tab-item
-       flex:0 0 9%
-       opacity:1 
-       color:white
-       cursor:pointer
-       &:hover
-         color:#2EA9DF
-       transition: background-color .5s ease
-       text-align:center  
-       font-size:1.2rem
-     .tab-item:nth-child(1)
-       font-size:2rem
-       flex:0 0 25%
-     .tab-item:nth-child(7)
-       flex:0 0 18%
-     .tab-item:nth-child(8)
-       flex:0 0 6%
-     .tab-item:nth-child(9)
-       flex:0 0 4%
+<style scoped lang="stylus" rel="stylesheet/stylus">
+  .header-box{
+      background:#1a1a1a;
+      background-image: -webkit-linear-gradient(#000, #121212);
+      background-image: linear-gradient(#000, #121212);
+      width:100vw;
+      height: 100px;
+      margin: 0 auto;
+      margin-top:-60px;margin-left:-1vw;
+      z-index: 30;
+  }
+  header{
+    display flex
+    justify-content space-between
+    align-items center
+    height:100%
+    color:white
+  }
+   .h-logo
+      flex 1
+      height: 100%
+      text-align:center  
+      font-size:1.8rem
+      div 
+        margin-top:2vh
+        cursor:pointer
+        &:hover
+          color:#2EA9DF
+   .h-sub
+      flex:1
+      display flex
+      justify-content center
+      align-content center
+      text-align:center  
+      font-size:1.2rem
+      div
+        margin-top:2vh
+        margin-right:5vw
+        cursor:pointer
+        &:hover
+          color:#2EA9DF
+   .h-aside
+      flex 1
+      display flex
+      justify-content center 
+      align-content center 
+      text-align center
+      font-size:1.2em
+      div
+        margin-top:3vh
+        margin-right:5vw
+        cursor:pointer
+        &:hover
+          color:#2EA9DF
+        img 
+          height:40px;
+    // .active{
+    //   font-weight:bold
+    //   color:#2EA9DF
+    // }
 </style>
