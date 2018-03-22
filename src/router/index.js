@@ -6,13 +6,13 @@ import scene from 'components/scene/scene'
 import purchase from 'components/purchase/purchase'
 import livecase from 'components/livecase/livecase'
 import displayvideo from 'components/videoDisplay/videoDisplay'
-import register from 'components/register/register'
-import login from 'components/login/login'
+import register from 'containers/register/register'
+import login from 'containers/login/login'
 
 import newmain from 'components/newmain/newmain'
 import newbuild from 'components/afterlogin/newbuild/newbuild'
 import media from 'components/afterlogin/media/media'
-import manager from 'components/afterlogin/manager/manager'
+import manage from 'containers/manage/manage'
 import personal from 'components/afterlogin/personnal/personal'
 import channel1 from 'components/afterlogin/newbuild/channel1'
 import livepc from 'components/afterlogin/newbuild/livepc'
@@ -40,6 +40,14 @@ export default new Router({
       ]
     },
     {
+       path:'/manage',
+       name:'manage',
+       component:manage,
+       children:[
+
+       ]
+    },
+    {
       path:'/newbuild',
       name:'newbuild',
       component:newbuild
@@ -48,11 +56,6 @@ export default new Router({
       path:'/media',
       name:'media',
       component:media
-    },
-    {
-      path:'/manager',
-      name:'manager',
-      component:manager
     },
     {
       path:'/personal',

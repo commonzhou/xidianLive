@@ -14,7 +14,7 @@
   </div>
   <el-form-item class="buttontotal">
     <el-button type="primary" @click="submitForm('ruleForm2')" class="buttons">登陆</el-button>
-    <el-button @click="resetForm('ruleForm2')" class="buttons">注册</el-button>
+    <router-link to="/register"><el-button @click="resetForm('ruleForm2')" class="buttons">注册</el-button></router-link>
   </el-form-item>
 </el-form>  
   </div>
@@ -49,6 +49,7 @@ import LogReg from 'store/LogReg.js'
     },
     methods: {
       submitForm(formName) {
+        var that=this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
              LogReg.postlogin({
@@ -58,7 +59,8 @@ import LogReg from 'store/LogReg.js'
                 function(res){
                 console.log(res);
                 if(res.data.retureValue==0){
-                   window.location.href="/#/newmain";
+                  that.$router.push('/main');
+                  // window.location.href="/#/newmain";
                 }
                 else{
                   alert("sb，用户名或者密码不对啊")
@@ -119,13 +121,15 @@ import LogReg from 'store/LogReg.js'
         color:white
         background-color:#00896C
         width:10vw
+        text-align center 
+        margin-right:1vw
      #check 
         width:80%
         font-size:0.9rem
         margin:1.6rem 0rem 2rem 9.5rem
         margin-left:4vw
         .check
-          margin-right 6vw
+          margin-right 8vw
   #subtitle
     margin:0 auto
     margin-top:9rem

@@ -5,14 +5,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Tab from 'components/common/tab'
-import Form from 'components/login/logform'
-import Foot from 'components/footer/footer'
+import Form from 'containers/login/logform'
     export default{
       components:{
-        Tab,
-        Form,
-        Foot
+        Form
       }
     }
 </script>

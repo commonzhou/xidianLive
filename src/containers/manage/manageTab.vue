@@ -3,16 +3,15 @@
     <div>
         <header class="h-box">
           <div class="h-logo">
-              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">学术直播</router-link>
+              <router-link tag='div' class="tab-item" to="/manage" @click="changePage(1)" :class="{active:choosePage===1}">后台管理系统</router-link>
           </div>
           <div class="h-sub">
-             <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link>
-             <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(2)" :class="{active:choosePage===2}">视频中心</router-link>
-             <router-link tag='div' class="tab-item" to="/manage" @click="changePage(3)" :class="{active:choosePage===3}">后台管理</router-link>
+             <router-link tag='div' class="tab-item" to="/manage" @click="changePage(1)" :class="{active:choosePage===1}">管理平台</router-link>
+             <router-link tag='div' class="tab-item" to="/main" @click="changePage(2)" :class="{active:choosePage===2}">直播前台</router-link>
           </div>
           <div class="h-aside">
-             <router-link tag='div' class="tab-item person" to="/login" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
-             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
+             <router-link tag='div' class="tab-item person" to="/login" @click="changePage(3)" :class="{active:choosePage===3}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
+             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
           </div>
         </header>
     </div>
@@ -45,9 +44,6 @@
             else if(this.$route.path === '/login'){
                this.changePage(4)
             }
-            else if(this.$route.path === '/purchase'){
-               this.changePage(5)
-            }
             else{
 
             }
@@ -58,11 +54,11 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .header-box{
-      background:#1a1a1a;
-      background-image: -webkit-linear-gradient(#000, #121212);
-      background-image: linear-gradient(#000, #121212);
+      background:#242F42;
+      background-image: -webkit-linear-gradient(#000, #242F42);
+      background-image: linear-gradient(#000, #242F42);
       width:100vw;
-      height: 100px;
+      height: 90px;
       margin: 0 auto;
       margin-top:-60px;margin-left:-1vw;
       z-index: 30;
