@@ -8,11 +8,18 @@ import livecase from 'components/livecase/livecase'
 import displayvideo from 'components/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
 import login from 'containers/login/login'
+import manage from 'containers/manage/manage'
+import document from 'containers/manage/manageDetail/document'
+import admin from 'containers/manage/manageDetail/admin'
+import channel from 'containers/manage/manageDetail/channel'
+import system from 'containers/manage/manageDetail/system'
+import count from 'containers/manage/manageDetail/count'
+import error from 'containers/error'
 
 import newmain from 'components/newmain/newmain'
 import newbuild from 'components/afterlogin/newbuild/newbuild'
 import media from 'components/afterlogin/media/media'
-import manage from 'containers/manage/manage'
+
 import personal from 'components/afterlogin/personnal/personal'
 import channel1 from 'components/afterlogin/newbuild/channel1'
 import livepc from 'components/afterlogin/newbuild/livepc'
@@ -27,6 +34,12 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
+      path:'*',               //该域名下的所有路径会被匹配，主要针对 对于不存在的页面进行请求
+      name:'redirect',
+      component:Index,
+      redirect: '/main'
+    },
+    {
       path: '/',
       component: Index,
       name: 'index',
@@ -34,7 +47,6 @@ export default new Router({
       children: [
         {path: 'main', component: main},
         {path: 'purchase', component: purchase},
-        {path: 'livecase', name: 'livecase', component: livecase},
         {path: 'register', name: 'register', component: register},
         {path: 'login', name:"login",component:login}
       ]
@@ -44,7 +56,11 @@ export default new Router({
        name:'manage',
        component:manage,
        children:[
-
+         {path:'/document',name:'document',component:document},
+         {path:'/admin',name:'admin',component:error},
+         {path:'/channel',name:'channel',component:channel},
+         {path:'/system',name:'system',component:error},
+         {path:'/count',name:'count',component:error}
        ]
     },
     {

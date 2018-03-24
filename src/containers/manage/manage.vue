@@ -25,6 +25,7 @@
     .main {
     min-height: calc(100vh - 454px);
     overflow: hidden;
-    width: 100%;
+    padding:300px;
+    padding-top:8vh;
   }  
 </style>

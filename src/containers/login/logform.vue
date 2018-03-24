@@ -27,6 +27,7 @@
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';  
 // axios.defaults.baseURL='http://118.89.112.125/xidianlive';
 import LogReg from 'store/LogReg.js'
+import {setStore, getStore, removeStore} from 'store/storage.js'
   export default {
     data() {
       return {
@@ -47,6 +48,9 @@ import LogReg from 'store/LogReg.js'
         }
       };
     },
+    components:{
+      //actionStore
+    },
     methods: {
       submitForm(formName) {
         var that=this;
@@ -59,6 +63,9 @@ import LogReg from 'store/LogReg.js'
                 function(res){
                 console.log(res);
                 if(res.data.retureValue==0){
+                  setStore("userName",that.ruleForm2.name);
+                  setStore("password",that.ruleForm2.pass);
+                  that.$store.state.login=true;
                   that.$router.push('/main');
                   // window.location.href="/#/newmain";
                 }

@@ -4,11 +4,12 @@
          <li :class="{active:item.show}" @click="changeitem(index,item)"
          v-for="(item,index) in manageOption" :key="index">
            <a href="javascript:void(0);">{{item.name}}</a> 
-           
            <transition name="slider">
             <ul v-show="item.show">
-                <li v-for="(a,index) in item.list" :key="index">
-                  <a href="javascript:void(0)">{{a}}</a>
+                <li v-for="(a,index) in item.list" :key="index" @click.stop>
+                  <router-link :to="{path:item.path}">
+                      <a href="javascript:void(0)">{{a}}</a>
+                  </router-link>
                 </li>
             </ul>
            </transition>
@@ -25,23 +26,28 @@
              manageOption: [{
                     name: '管理员管理',
                     list: ['角色管理', '权限管理'],
-                    show: false
+                    show: false,
+                    path:'/admin'
                 }, {
                     name: '频道管理',
-                    list: ['分类管理', '新建频道', '删除频道'],
-                    show: false
+                    list: ['分类管理', '新建频道'],
+                    show: false,
+                    path:'/channel'
                 }, {
                     name: '流量监控',
                     list: ['观看人数', '点赞热度','弹幕数目'],
-                    show: false
+                    show: false,
+                    path:'/count'
                 }, {
                     name: '系统设置',
                     list: ['基本设置'],
-                    show: false
+                    show: false,
+                    path:'/system'
                 }, {
                     name: '使用说明',
                     list: ['操作说明'],
-                    show: false
+                    show: false,
+                    path:'/document'
                 }]   
            }
        },
@@ -78,8 +84,9 @@
   width: 240px;
   height: 100%;
   background: #293949;
-  position: absolute;
+  position: fixed;
   left:0;
+  top:90px;     //因为head是90px
   -webkit-transition: all .3s ease-in-out;
   -moz-transition: all .3s ease-in-out;
   -o-transition: all .3s ease-in-out;
@@ -112,7 +119,7 @@ a{
  {
      color: #1abc9c;
  }
-.active{
+li.active{
    color: #000;
 }
 

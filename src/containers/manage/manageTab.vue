@@ -54,6 +54,7 @@
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
   .header-box{
+      position fixed
       background:#242F42;
       background-image: -webkit-linear-gradient(#000, #242F42);
       background-image: linear-gradient(#000, #242F42);
