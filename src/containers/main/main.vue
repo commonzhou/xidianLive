@@ -1,10 +1,10 @@
 <template>
   <div class="home">
        <div class="banner">
-        <div class="bg" ref="bg"
-            @mouseover="bgOver($refs.bg)"
+         <div class="bg" ref="bg" @mouseover="bgOver($refs.bg)"
             @mousemove="bgMove($refs.bg,$event)"
             @mouseout="bgOut($refs.bg)">
+        <!-- <img   scr="~assets/imgs/fanshao/starry.jpg"  /> -->
           <span class="img a"></span>
           <!-- <img src="~assets/imgs/fanshao/starry.jpg" alt=""> -->
           <span class="text b">西电直播<br/>助您仰望更远的星空</span>
@@ -45,25 +45,25 @@ import videoCard from 'components/common/videoCard'
             },
             homevideo:[
               {
-               imgLocation:"static/img/cover1.d61133f.jpg",
+               imgLocation:"static/imgs/cover1.jpg",
                videoName:"迎新晚会",
                playNum:'22',
                viewNum:'11'
               },
                {
-               imgLocation:"static/img/cover2.fa15020.jpg",
+               imgLocation:"static/imgs/cover2.jpg",
                videoName:"巡回演唱",
                playNum:'2200',
                viewNum:'117'
               },
               {
-               imgLocation:"static/img/cover3.da6a603.jpg",
+               imgLocation:"static/imgs/cover3.jpg",
                videoName:"世界机器学习图灵大会",
                playNum:'0',
                viewNum:'1'
               },
               {
-               imgLocation:"static/img/cover4.69049da.jpg",
+               imgLocation:"static/imgs/cover4.jpg",
                videoName:" CDN 研讨",
                playNum:'179',
                viewNum:'333'

@@ -37,5 +37,21 @@ export default{
     state.login = true
     setStore('userInfo', info)
   },
+
+  //新建频道使用
+  [ADD_CHANNEL] (state,{imgLocation,videoName,playNum,viewNum}){
+     let videoList=state.videoList;
+     let item={
+       imgLocation,
+       videoName,
+       playNum,
+       viewNum
+     }
+    //  if(videoList.length){
+    //     videoList.splice(videoList.length-1,0,item);
+    //  }
+     videoList.push(item);
+     state.videoList=videoList;
+  }
   
 }

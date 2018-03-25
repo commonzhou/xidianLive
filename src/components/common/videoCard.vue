@@ -4,8 +4,9 @@
         <!-- <router-link :to="'goodsDetails?productId='+msg.productId">
           <img v-lazy="msg.productImageBig" :alt="msg.productName">
         </router-link> -->
+
         <img :src="imgLocation" :alt="videoName">
-      
+
       </div>
       <h3 class="title">{{msg.videoName}}</h3>
       <!-- <h3 class="sub-title ellipsis">{{msg.sub_title}}</h3> -->
