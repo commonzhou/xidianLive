@@ -5,19 +5,16 @@
       <img src="~assets/imgs/back02.jpg">
     </div>
     <threecolumn></threecolumn>
-    <Foot></Foot>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 import Tab from 'components/common/tab'
-import Foot from 'components/footer/footer'
 import threecolumn from 'components/scenethreecolumn/scenethreecolumn'
     export default{
       name:'scene',
       components:{
         Tab,
-        Foot,
         threecolumn
       }
     }

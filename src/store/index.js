@@ -37,7 +37,21 @@ const state={
                 videoName:"学术频道",
                 playNum:'2200',
                 viewNum:'117'
-                }
+            }
+    ],
+    liveList:[
+        {
+            imgLocation:"static/imgs/cover1.jpg",
+            videoName:"晚会直播",
+            playNum:'22',
+            viewNum:'11'
+           },
+            {
+            imgLocation:"static/imgs/cover2.jpg",
+            videoName:"学术直播",
+            playNum:'2200',
+            viewNum:'117'
+            }
     ]
 }
 

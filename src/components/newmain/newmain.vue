@@ -7,7 +7,7 @@
     </div>
    <Threecolumn></Threecolumn>
    <leftright></leftright>
-   <Foot></Foot>
+ 
   </div>
 </template>
 
@@ -16,15 +16,14 @@ import Tab from 'components/newtab/newtab'
 import Swipe from 'components/swipe/swipe'
 import Threecolumn from 'components/threecolumn/threecolumn'
 import leftright from 'components/mainpageleftright/mainpageleftright'
-import Foot from 'components/footer/footer'
+
  export default{
       name:'index',
       components:{
         Tab,
         Swipe,
         Threecolumn,
-        leftright,
-        Foot
+        leftright
       }
     }
 </script>

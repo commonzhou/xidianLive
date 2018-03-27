@@ -1,5 +1,5 @@
 <template>
-  <div class="video-item">
+  <div class="video-item" @click="cardClick($event)">
       <div class="cover-img">
         <!-- <router-link :to="'goodsDetails?productId='+msg.productId">
           <img v-lazy="msg.productImageBig" :alt="msg.productName">
@@ -31,6 +31,11 @@
       }
     },
     components: {
+    },
+    methods: {
+      cardClick (event) {
+        this.$emit('cardClick', event)
+      }
     }
   }
 

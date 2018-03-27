@@ -1,15 +1,14 @@
 <template>
   <div>
-    
-       <section class="mt30 clearfix">
-       <Shelf title="频道一览">
+     <section class="mt30 clearfix">
+       <Shelf :title="title">
        </Shelf>
       <div  class="homevideo" > 
-        <videoCard :msg="item" :key="i" v-for="(item,i) in videoList" @cardClick="toLive(item.videoName)"></videoCard>
+        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.videoName)"></videoCard>
        </div>
-        <channelInput v-show="isShow" v-on:message="handleMessage"></channelInput>
+        <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
      </section>
-     <Button text="新建频道"  @btnClick="newchannel"></Button>
+     <Button text="新建直播"  @btnClick="newlive"></Button>
     
   </div>
 </template>
@@ -18,46 +17,56 @@
 import Shelf from 'components/common/shelf'
 import videoCard from 'components/common/videoCard'
 import Button from 'components/common/button'
-import channelInput from 'components/channelInput'
+import liveInput from 'components/liveInput'
 import { mapMutations, mapState } from 'vuex'
 import { getStore } from 'store/storage'
     export default{
       data(){
            return{
              isShow:false,   //决定新建频道框是否弹出
-             messages:''     //存储新建框这个子组件传上来的信息
+             messages:'',     //存储新建框这个子组件传上来的信息
+             title:''
            }
        },
       components:{
         Shelf,
         videoCard,
         Button,
-        channelInput 
+        liveInput 
+      },
+       created(){
+       this.fetchData()
+       },
+      watch:{
+      '$route':'fetchData'
       },
       computed:{
         ...mapState(
-          ['videoList']
+          ['liveList']
         )
       },
       methods:{
-        ...mapMutations(['ADD_CHANNEL']),
-        newchannel:function(){
+        ...mapMutations(['ADD_LIVE']),
+        newlive:function(){
            this.isShow = !this.isShow;
         },
-        handleMessage:function(payload){
+        handlelive:function(payload){
            this.messages=payload;
            this.isShow=false;
-           this.ADD_CHANNEL({
+           this.ADD_LIVE({
              imgLocation:'static/imgs/cover2.jpg',
              videoName:this.messages.name,
              playNum:0,
              viewNum:0
            });
         },
+        fetchData:function(){
+            console.log(this.$route)
+            this.title=this.$route.params.nameId
+        },
         toLive:function(name){
-           //console.log(name)
-           //this.$router.push('newLive');
-           this.$router.push({name:'newLive',params:{nameId:name}});
+           console.log(name)
+           this.$router.push({name:'viewVideo',params:{nameId:name}});
         }
       }
     }

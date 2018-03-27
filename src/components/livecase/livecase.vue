@@ -9,7 +9,6 @@
 
 <script type="text/ecmascript-6">
  import Tab from 'components/common/tab'
- import Foot from 'components/footer/footer'
  import livecolumn from 'components/livecasecolumn/livecasecolumn'
     export default{
       data(){
@@ -20,7 +19,6 @@
        },
       components:{
         Tab,
-        Foot,
         livecolumn
       }
     }

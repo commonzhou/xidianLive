@@ -8,13 +8,16 @@ import livecase from 'components/livecase/livecase'
 import displayvideo from 'components/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
 import login from 'containers/login/login'
-import manage from 'containers/manage/manage'
-import document from 'containers/manage/manageDetail/document'
+import manage from 'containers/manage/manage'                    //通往管理页面
+import document from 'containers/manage/manageDetail/document'   //管理界面文档介绍
 import admin from 'containers/manage/manageDetail/admin'
-import channel from 'containers/manage/manageDetail/channel'
+import channel from 'containers/manage/manageDetail/channel'     //管理频道，可新建频道
+import newLive from 'containers/manage/manageDetail/newLive'     //管理直播，可新建直播
 import system from 'containers/manage/manageDetail/system'
 import count from 'containers/manage/manageDetail/count'
-import error from 'containers/error'
+import error from 'containers/error'                             //404页面
+import viewVideo from 'components/common/viewVideo'              //视频pc端播放
+import viewMobile from 'components/common/viewMobile'            //视频手机端播放
 
 import newmain from 'components/newmain/newmain'
 import newbuild from 'components/afterlogin/newbuild/newbuild'
@@ -60,8 +63,19 @@ export default new Router({
          {path:'/admin',name:'admin',component:error},
          {path:'/channel',name:'channel',component:channel},
          {path:'/system',name:'system',component:error},
-         {path:'/count',name:'count',component:error}
+         {path:'/count',name:'count',component:error},
+         {path:'/newLive',name:'newLive',component:newLive}
        ]
+    },
+    {
+      path:'/viewVideo',
+      name:'viewVideo',                        //name加引号...
+      component:viewVideo
+    },
+    {
+      path:'/viewMobile',
+      name:'viewMobile',
+      component:viewMobile
     },
     {
       path:'/newbuild',

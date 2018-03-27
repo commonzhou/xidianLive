@@ -52,6 +52,19 @@ export default{
     //  }
      videoList.push(item);
      state.videoList=videoList;
+  },
+
+  //新建直播使用
+  [ADD_LIVE] (state,{imgLocation,videoName,playNum,viewNum}){
+     let liveList=state.liveList;
+     let item={
+      imgLocation,
+      videoName,
+      playNum,
+      viewNum
+    }
+    liveList.push(item);
+    state.liveList=liveList;
   }
   
 }
