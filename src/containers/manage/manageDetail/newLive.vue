@@ -8,7 +8,7 @@
        </div>
         <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
      </section>
-     <Button text="新建直播"  @btnClick="newlive"></Button>
+     <Button text="新建直播"  @btnClick="newlive" class="button"></Button>
     
   </div>
 </template>
@@ -88,4 +88,8 @@ import { getStore } from 'store/storage'
     >div
       flex 1
       width:25%
+  .button{
+    margin:0 auto
+    margin-left:280px
+  }
 </style>

@@ -8,16 +8,20 @@ import livecase from 'components/livecase/livecase'
 import displayvideo from 'components/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
 import login from 'containers/login/login'
+import message from 'containers/message/message'
 import manage from 'containers/manage/manage'                    //通往管理页面
 import document from 'containers/manage/manageDetail/document'   //管理界面文档介绍
 import admin from 'containers/manage/manageDetail/admin'
 import channel from 'containers/manage/manageDetail/channel'     //管理频道，可新建频道
 import newLive from 'containers/manage/manageDetail/newLive'     //管理直播，可新建直播
 import system from 'containers/manage/manageDetail/system'
-import count from 'containers/manage/manageDetail/count'
+import count from 'containers/manage/count/count'                //直播数据页面
+import dianbo from 'containers/manage/count/dianbo'              //点播数据页面
 import error from 'containers/error'                             //404页面
 import viewVideo from 'components/common/viewVideo'              //视频pc端播放
 import viewMobile from 'components/common/viewMobile'            //视频手机端播放
+
+
 
 import newmain from 'components/newmain/newmain'
 import newbuild from 'components/afterlogin/newbuild/newbuild'
@@ -51,20 +55,24 @@ export default new Router({
         {path: 'main', component: main},
         {path: 'purchase', component: purchase},
         {path: 'register', name: 'register', component: register},
-        {path: 'login', name:"login",component:login}
+        {path: 'login', name:"login",component:login},
+        {path: 'message',name:'message',component:message}
       ]
     },
     {
        path:'/manage',
        name:'manage',
        component:manage,
+       redirect:'/channel',
        children:[
          {path:'/document',name:'document',component:document},
          {path:'/admin',name:'admin',component:error},
          {path:'/channel',name:'channel',component:channel},
          {path:'/system',name:'system',component:error},
-         {path:'/count',name:'count',component:error},
-         {path:'/newLive',name:'newLive',component:newLive}
+         {path:'/count',name:'count',component:count},
+         {path:'/dianbo',name:'dianbo',component:dianbo},
+         {path:'/newLive',name:'newLive',component:newLive},
+         {path:'/purchase',name:'purchase',component:purchase}
        ]
     },
     {

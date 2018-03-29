@@ -9,7 +9,7 @@
        </div>
         <channelInput v-show="isShow" v-on:message="handleMessage"></channelInput>
      </section>
-     <Button text="新建频道"  @btnClick="newchannel"></Button>
+     <Button text="新建频道"  @btnClick="newchannel" class="button"></Button>
     
   </div>
 </template>
@@ -68,6 +68,8 @@ import { getStore } from 'store/storage'
     width:1220px;
     height:100%;
     margin:50px auto;
+    margin-left -18px
+    margin-top 10px
     border-radius: 8px;
     border: 1px solid #dcdcdc;
     border-color: rgba(0, 0, 0, .14);
@@ -79,4 +81,8 @@ import { getStore } from 'store/storage'
     >div
       flex 1
       width:25%
+  .button{
+    margin:0 auto
+    margin-left:280px
+  }
 </style>

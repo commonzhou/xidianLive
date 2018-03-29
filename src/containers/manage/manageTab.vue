@@ -11,7 +11,7 @@
           </div>
           <div class="h-aside">
              <router-link tag='div' class="tab-item person" to="/login" @click="changePage(3)" :class="{active:choosePage===3}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
-             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
+             <router-link tag='div' class="tab-item buy" to="/message" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/message.png" alt="购买"></router-link> 
           </div>
         </header>
     </div>
@@ -32,16 +32,16 @@
           },
            // 通过路由改变导航文字样式
           getPage(){
-            if(this.$toute.path === '/'||this.$route.path === '/main'){
+            if(this.$toute.path === '/'||this.$route.path === '/manage'){
                this.changePage(1) 
             }
-            else if(this.$route.path === '/livecase'){
+            else if(this.$route.path === '/main'){
                this.changePage(2)
             }
-            else if(this.$route.path === '/displayvideo'){
+            else if(this.$route.path === '/login'){
                this.changePage(3)
             }
-            else if(this.$route.path === '/login'){
+            else if(this.$route.path === '/message'){
                this.changePage(4)
             }
             else{

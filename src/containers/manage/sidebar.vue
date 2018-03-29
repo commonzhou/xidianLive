@@ -7,7 +7,7 @@
            <transition name="slider">
             <ul v-show="item.show">
                 <li v-for="(a,index) in item.list" :key="index" @click.stop>
-                  <router-link :to="{path:item.path}">
+                  <router-link :to="{path:item.path[index]}">
                       <a href="javascript:void(0)">{{a}}</a>
                   </router-link>
                 </li>
@@ -24,30 +24,41 @@
       data(){
            return{
              manageOption: [{
-                    name: '管理员管理',
-                    list: ['角色管理', '权限管理'],
-                    show: false,
-                    path:'/admin'
-                }, {
                     name: '频道管理',
                     list: ['分类管理', '新建频道'],
                     show: false,
-                    path:'/channel'
-                }, {
-                    name: '流量监控',
-                    list: ['观看人数', '点赞热度','弹幕数目'],
+                    path:['/channel'],
+                    nickname:'channel'
+                },{
+                    name: '账户管理',
+                    list: ['个人中心', '认证中心','子账户管理'],
                     show: false,
-                    path:'/count'
+                    path:['/admin'],
+                    nickname:'admin'
                 }, {
-                    name: '系统设置',
-                    list: ['基本设置'],
+                    name: '统计信息',
+                    list: ['直播统计', '点播统计'],
                     show: false,
-                    path:'/system'
+                    path: ['/count','/dianbo'],
+                    nickname:'count'
+                }, {
+                    name: '授权观看',
+                    list: ['用户组观看', '付费观看','授权码观看'],
+                    show: false,
+                    path:['/system'],
+                    nickname:'system'
+                }, {
+                    name: '订单管理',
+                    list: ['套餐购买','订单记录','账户余额'],
+                    show: false,
+                    path:['/purchase'],
+                    nickname:'purchase'
                 }, {
                     name: '使用说明',
                     list: ['操作说明'],
                     show: false,
-                    path:'/document'
+                    path:['/document'],
+                    nickname:'document'
                 }]   
            }
        },

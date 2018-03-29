@@ -21,23 +21,11 @@ const state={
             viewNum:'117'
             },
             {
-                imgLocation:"static/imgs/cover1.jpg",
+            imgLocation:"static/imgs/cover1.jpg",
             videoName:"晚会频道",
             playNum:'22',
             viewNum:'11'
-           },
-            {
-            imgLocation:"static/imgs/cover2.jpg",
-            videoName:"学术频道",
-            playNum:'2200',
-            viewNum:'117'
-            },
-            {
-                imgLocation:"static/imgs/cover2.jpg",
-                videoName:"学术频道",
-                playNum:'2200',
-                viewNum:'117'
-            }
+           }
     ],
     liveList:[
         {

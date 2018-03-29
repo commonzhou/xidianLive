@@ -1,17 +1,10 @@
 <template>
   <div>
       <Tab></Tab>
-        <div style="text-align:left;font-size:2rem;margin-top:1.3rem;margin-left:1rem">{{name}}</div>
-        
+      <div class="header">{{name}}</div>
       <div class="container">
            <div class="main">
-        
            <div id="window">
-              
-             <!-- 我是pc端直播窗口
-             <div>
-               <router-link to="/livemobile">我是手机端的直播窗口</router-link>
-             </div>  -->
            <div id="movie" style="width:100%;height:100%"></div>
            </div>
         </div>     
@@ -29,6 +22,10 @@
             <div>XXXXXXXXXXXXXXXX 复制</div>
             <div>分流地址</div>
             <div>XXXXXXXXXXXXXXXX 复制</div>
+            <div>手机端直播地址</div>
+            <div>
+               <router-link to="/livemobile" tag="div" class="mobile">前往手机端</router-link>
+            </div>  
           </div>
           <div class="section">
              <div>节目单</div>
@@ -48,7 +45,7 @@ import liveInfo from 'store/liveInfo.js'
     export default{
         data(){
             return{
-                name:""
+                name:""   //name刷新了就没有了，因此需要存储cookie和localStorage
             }
         },
       components:{                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -86,6 +83,14 @@ import liveInfo from 'store/liveInfo.js'
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+    .header
+      width:20vw
+      height:10vh
+      position absolute
+      margin-top:5vh
+      margin-left 5vw
+      color:black
+      font-size: 2vw   
     .container
       width:80vw
       height:100vh
@@ -94,21 +99,20 @@ import liveInfo from 'store/liveInfo.js'
       display flex
       .main
         flex: 0 0 80%
-        height: 50rem
-        background-color: #FCFAF2
+        height: 100%
         z-index :15
         overflow hidden
         margin-left:0.5rem
         #window 
           border:2px solid #787D7B
           width:95%
-          height:40rem
+          height:80%
           margin:0 auto
           margin-top:7vh
       .aside
         flex:0 0 20%
         width: 20%
-        height: 50rem
+        height: 100vh
         float: right
         margin-left:1%
         display:flex

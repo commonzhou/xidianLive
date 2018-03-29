@@ -12,7 +12,7 @@
           </div>
           <div class="h-aside">
              <router-link tag='div' class="tab-item person" to="/login" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
-             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
+             <router-link tag='div' class="tab-item buy" to="/message" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/message.png" alt="购买"></router-link> 
           </div>
         </header>
     </div>
@@ -45,7 +45,7 @@
             else if(this.$route.path === '/login'){
                this.changePage(4)
             }
-            else if(this.$route.path === '/purchase'){
+            else if(this.$route.path === '/message'){
                this.changePage(5)
             }
             else{
