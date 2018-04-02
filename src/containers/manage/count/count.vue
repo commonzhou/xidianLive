@@ -1,24 +1,37 @@
 <template>
   <div>
-    
-    <div id="graph1"></div>
-    <div id="graph2"></div>
-    <div class="tab">
-    <div id="graph3"></div>
-    <div id="graph4"></div>
-    <div id="graph5"></div>
-    </div>
-    <div id="graph6"></div>
-    <!-- <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="性别比例" name="first"  class="tab"><div id="graph3"></div></el-tab-pane>
-    <el-tab-pane label="学历比例" name="second" class="tab"> <div id="graph4"></div></el-tab-pane>
-    <el-tab-pane label="年龄段比例" name="third"  class="tab"> <div id="graph5"></div></el-tab-pane>
-    <el-tab-pane label="地区比例" name="fourth" class="tab"> <div id="graph6"></div></el-tab-pane>
-  </el-tabs> -->
+     <section class="mt30 clearfix">
+       <Shelf title="直播时间和人数">
+       </Shelf>
+         <div id="graph1"></div>
+     </section>
+      <section class="mt30 clearfix">
+       <Shelf title="直播人数和时间">
+       </Shelf>
+         <div id="graph2"></div>
+     </section>
+      <section class="mt30 clearfix">
+       <Shelf title="比例分布">
+       </Shelf>
+         <div class="rate">
+             <div id="graph3"></div>
+             <div id="graph4"></div>
+            <div id="graph5"></div>
+         </div>
+     </section>
+      <section class="mt30 clearfix">
+       <Shelf title="地区分布图">
+       </Shelf>
+         <div id="graph6"></div>
+     </section>
+     
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+      // 引入 ECharts 主模块
+var echarts = require('echarts/lib/echarts');
+import Shelf from 'components/common/shelf';
       // 引入 ECharts 主模块
 var echarts = require('echarts/lib/echarts');
 // 引入柱状图
@@ -30,22 +43,19 @@ import 'echarts/map/js/china.js';
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
+
     export default{
       data(){
            return{
-              // activeName: 'first'
+           
            }
        },
       components:{
-        
+        Shelf
       },
       methods:{
-      //    handleClick(tab, event) {
-      //      this.activeName=tab.$options.propsData.name;
-      // }
-      
+       
       },
-      
       mounted(){
 // 基于准备好的dom，初始化echarts实例
 var myChart1 = echarts.init(document.getElementById('graph1'));
@@ -54,35 +64,18 @@ var myChart3 = echarts.init(document.getElementById('graph3'));
 var myChart4 = echarts.init(document.getElementById('graph4'));
 var myChart5 = echarts.init(document.getElementById('graph5'));
 var myChart6 = echarts.init(document.getElementById('graph6'));
-  window.onresize=function(){
+window.onresize=function(){
   myChart1.resize();
   myChart2.resize();
   myChart3.resize();
   myChart4.resize();
   myChart5.resize();
   myChart6.resize();
-  }
+}
 // 绘制图表
 myChart1.setOption({
     title: {
-        text: '各时间段观看人数'
-    },
-    tooltip: {},
-    xAxis: {
-        data: ['10', '20', '30', '40', '50', '60']
-    },
-    yAxis: {},
-    series: [{
-        name: '人数',
-        type: 'bar',
-        data: [5, 20, 36, 10, 10, 20]
-    }]
-});
-
-// 绘制图表
-myChart2.setOption({
-    title: {
-        text: '直播时间和人数'
+        text: ''
     },
     tooltip: {},
     xAxis: {
@@ -98,6 +91,22 @@ myChart2.setOption({
     }]
 });
 
+myChart2.setOption({
+    title: {
+        text: ''
+    },
+    tooltip: {},
+    xAxis: {
+        data: ['10', '20', '30', '40', '50', '60']
+    },
+    yAxis: {},
+    series: [{
+        name: '人数',
+        type: 'bar',
+        data: [5, 20, 36, 10, 10, 20]
+    }]
+});
+
 myChart3.setOption({
     title : {
         text: '观众的男女比例',
@@ -108,17 +117,12 @@ myChart3.setOption({
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['男','女','不明']
-    },
     series : [
         {
             name: '性别情况',
             type: 'pie',
-            radius : '45%',
-            center: ['50%', '60%'],
+            radius : '50%',
+            center: ['50%', '50%'],
             data:[
                 {value:335, name:'男'},
                 {value:310, name:'女'},
@@ -145,17 +149,12 @@ myChart4.setOption({
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['20以下','20-40','40以上']
-    },
     series : [
         {
             name: '年龄情况',
             type: 'pie',
-            radius : '45%',
-            center: ['50%', '60%'],
+            radius : '50%',
+            center: ['50%', '50%'],
             data:[
                 {value:335, name:'20以下'},
                 {value:310, name:'20-40'},
@@ -182,17 +181,12 @@ myChart5.setOption({
         trigger: 'item',
         formatter: "{a} <br/>{b} : {c} ({d}%)"
     },
-    legend: {
-        orient: 'vertical',
-        left: 'left',
-        data: ['本科','研究生','博士','其他']
-    },
     series : [
         {
             name: '学历情况',
             type: 'pie',
-            radius : '45%',
-            center: ['50%', '60%'],
+            radius : '50%',
+            center: ['50%', '50%'],
             data:[
                 {value:335, name:'本科'},
                 {value:310, name:'研究生'},
@@ -210,12 +204,12 @@ myChart5.setOption({
     ]
 });
 
+
 function randomData() {
     return Math.round(Math.random()*1000);
 }
 myChart6.setOption({
     title: {
-        text: '观众地区分布图',
         left: 'center'
     },
     tooltip: {
@@ -298,36 +292,45 @@ myChart6.setOption({
         }]
 });
 }
-
 }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+    .mt30 {
+    width:1000px;
+    height:100%;
+    margin:50px auto;
+    margin-left 10px
+    margin-top 10px
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    border-color: rgba(0, 0, 0, .14);
+    box-shadow: 0 3px 8px -6px rgba(0, 0, 0, .1);
+  }
    #graph1
      width:100%
      height:50vh
    #graph2
      width:100%
-     height:50vh
-   .tab
-     width:90%
-     margin-top:6vh
-     margin-left:5vw
+     height:50vh 
+   #graph6
+     width:100%
+     height:80vh
+   .rate
      display flex
-     flex-wrap:wrap
      #graph3 
        flex:1
-       width:40%
-       height 50vh
+       width:33%
+       height 45vh
+       margin-top 20px
      #graph4 
        flex:1
-       width:40%
-       height 50vh
+       width:33%
+       height 45vh
+       margin-top 20px
      #graph5
        flex:1
-       width:40%
-       height 50vh
-   #graph6
-     width: 100%
-     height 80vh
+       width:33%
+       height 45vh
+       margin-top 20px
 </style>

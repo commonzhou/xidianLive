@@ -1,7 +1,7 @@
 <template>
    <div class="box">
      <div class="title">
-        <h2>{{title}}</h2>
+        <h2 @click="shelfClick($event)">{{title}}</h2>
         <div>
             <slot name="right"></slot>
         </div>
@@ -15,7 +15,12 @@
 export default {
   props:[
       'title'
-  ]
+  ],
+   methods: {
+     shelfClick (event) {
+        this.$emit('shelfClick', event)
+      }
+    }
 }
 </script>
 

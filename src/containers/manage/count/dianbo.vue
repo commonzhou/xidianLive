@@ -1,7 +1,10 @@
 <template>
   <div>
-    <div id="timePeople"></div>
-  
+     <section class="mt30 clearfix">
+       <Shelf title="点播时间和人数">
+       </Shelf>
+         <div id="timePeople"></div>
+     </section>
   </div>
 </template>
 
@@ -13,6 +16,7 @@ require('echarts/lib/chart/line');
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
+import Shelf from 'components/common/shelf';
     export default{
       data(){
            return{
@@ -20,7 +24,7 @@ require('echarts/lib/component/title');
            }
        },
       components:{
-        
+        Shelf
       },
       methods:{
        
@@ -34,7 +38,7 @@ window.onresize=function(){
 // 绘制图表
 myChart1.setOption({
     title: {
-        text: '点播时间和人数'
+        text: ''
     },
     tooltip: {},
     xAxis: {
@@ -54,6 +58,17 @@ myChart1.setOption({
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
+    .mt30 {
+    width:1220px;
+    height:100%;
+    margin:50px auto;
+    margin-left -18px
+    margin-top 10px
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    border-color: rgba(0, 0, 0, .14);
+    box-shadow: 0 3px 8px -6px rgba(0, 0, 0, .1);
+  }
    #timePeople
      width:100%
      height:50vh

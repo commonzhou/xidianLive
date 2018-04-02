@@ -37,9 +37,9 @@
                     nickname:'admin'
                 }, {
                     name: '统计信息',
-                    list: ['直播统计', '点播统计'],
+                    list: ['直播统计', '直播表单','点播统计'],
                     show: false,
-                    path: ['/count','/dianbo'],
+                    path: ['/count','/form','/dianbo'],
                     nickname:'count'
                 }, {
                     name: '授权观看',

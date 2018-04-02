@@ -26,6 +26,8 @@
         <videoCard :msg="item" :key="i" v-for="(item,i) in homevideo"></videoCard>
        </div>
     </section>
+
+    <goTop></goTop>
   </div>
 </template>
 
@@ -33,6 +35,7 @@
 import Shelf from 'components/common/shelf'
 import disCard from 'components/common/displayCard'
 import videoCard from 'components/common/videoCard'
+import goTop from 'components/common/goTop'
  export default{
       data(){
           return{
@@ -107,7 +110,8 @@ import videoCard from 'components/common/videoCard'
       components:{
          Shelf,
          disCard,
-         videoCard
+         videoCard,
+         goTop
       }
     }
 </script>

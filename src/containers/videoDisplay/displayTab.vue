@@ -4,7 +4,7 @@
 <el-menu :default-active="activeIndex2" class="el-menu-demo"
  mode="horizontal" @select="handleSelect" id="tab"
  >
-  <el-menu-item index="1"> <router-link tag='div' to="/main">首页</router-link></el-menu-item>
+  <el-menu-item index="1"> <router-link tag='div' to="/displayvideo">视频区</router-link></el-menu-item>
   <el-submenu index="2">
     <template slot="title">点播</template>
     <el-menu-item index="2-1"><router-link tag='div' to="/subvideo/vodstudy">学术</router-link></el-menu-item>
@@ -15,6 +15,7 @@
     <el-menu-item index="2-1"><router-link tag='div' to="/subvideo/livestudy">学术</router-link></el-menu-item>
     <el-menu-item index="2-2"><router-link tag='div' to="/subvideo/liveparty">晚会</router-link></el-menu-item>
   </el-submenu>
+  <el-menu-item index="4"> <router-link tag='div' to="/main">返回首页</router-link></el-menu-item>
 </el-menu>
 <div class="line"></div>
 

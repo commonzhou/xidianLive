@@ -40,7 +40,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import displayTab from 'components/videoDisplay/displayTab'
+import displayTab from 'containers/videoDisplay/displayTab'
 export default {
    components:{
        displayTab

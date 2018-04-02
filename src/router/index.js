@@ -5,7 +5,7 @@ import main from 'containers/main/main'
 import scene from 'components/scene/scene'
 import purchase from 'components/purchase/purchase'
 import livecase from 'components/livecase/livecase'
-import displayvideo from 'components/videoDisplay/videoDisplay'
+import displayvideo from 'containers/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
 import login from 'containers/login/login'
 import message from 'containers/message/message'
@@ -17,6 +17,7 @@ import newLive from 'containers/manage/manageDetail/newLive'     //管理直播�
 import system from 'containers/manage/manageDetail/system'
 import count from 'containers/manage/count/count'                //直播数据页面
 import dianbo from 'containers/manage/count/dianbo'              //点播数据页面
+import form from 'containers/manage/count/form'                  //观看直播的用户表单统计
 import error from 'containers/error'                             //404页面
 import viewVideo from 'components/common/viewVideo'              //视频pc端播放
 import viewMobile from 'components/common/viewMobile'            //视频手机端播放
@@ -33,8 +34,8 @@ import livepc from 'components/afterlogin/newbuild/livepc'
 import livemobile from 'components/afterlogin/newbuild/livemobile'
 import livemobilelarge from 'components/afterlogin/newbuild/livemobilelarge'
 
-import subvideo from 'components/videoDisplay/subvideoDisplay'
-import playvideo from 'components/videoDisplay/playVideo'
+import subvideo from 'containers/videoDisplay/subvideoDisplay'
+import playvideo from 'containers/videoDisplay/playVideo'
 
 Vue.use(Router)
 
@@ -71,6 +72,7 @@ export default new Router({
          {path:'/system',name:'system',component:error},
          {path:'/count',name:'count',component:count},
          {path:'/dianbo',name:'dianbo',component:dianbo},
+         {path:'/form',name:'form',component:form},
          {path:'/newLive',name:'newLive',component:newLive},
          {path:'/purchase',name:'purchase',component:purchase}
        ]
