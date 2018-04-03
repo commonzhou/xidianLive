@@ -39,6 +39,7 @@ import liveHandler from 'store/liveinfo.js'
        created(){
          console.log('hahahah')
        this.fetchData();
+       this.title=localStorage.getItem('liveTitle');
        var that=this;
        var channel=localStorage.getItem('channelId');
        liveHandler.getLiveChannel({"channelId":channel}).then(function(res){
@@ -88,10 +89,10 @@ import liveHandler from 'store/liveinfo.js'
         },
         fetchData:function(){
             console.log(this.$route)
-            this.title=this.$route.params.nameId
-           // this.channelId=this.$route.params.channelId
-            //localStorage.removeItem('channelId')
-            if(this.$route.params.channelId){
+            if(this.$route.params.nameId){                                       //处理f5以后，title为空的问题
+               localStorage.setItem('liveTitle',this.$route.params.nameId);
+            }
+            if(this.$route.params.channelId){                                   //处理f5之后，channelId为空的问题
             localStorage.setItem('channelId',this.$route.params.channelId);
             }
         },
