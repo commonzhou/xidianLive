@@ -4,7 +4,7 @@
        <Shelf :title="title">
        </Shelf>
       <div  class="homevideo" > 
-        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.videoName)"></videoCard>
+        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.channelName)"></videoCard>
        </div>
         <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
      </section>
@@ -20,12 +20,14 @@ import Button from 'components/common/button'
 import liveInput from 'components/liveInput'
 import { mapMutations, mapState } from 'vuex'
 import { getStore } from 'store/storage'
+import liveHandler from 'store/liveinfo.js'
     export default{
       data(){
            return{
              isShow:false,   //决定新建频道框是否弹出
              messages:'',     //存储新建框这个子组件传上来的信息
              title:''
+             //channelId:''
            }
        },
       components:{
@@ -35,7 +37,31 @@ import { getStore } from 'store/storage'
         liveInput 
       },
        created(){
-       this.fetchData()
+         console.log('hahahah')
+       this.fetchData();
+       var that=this;
+       var channel=localStorage.getItem('channelId');
+       liveHandler.getLiveChannel({"channelId":channel}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                 that.$store.state.liveList=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   if(!temp.channelName) temp.channelName=temp.liveName;
+                   that.$store.state.liveList.push(temp);
+                }
+               
+              }
+              // else{
+              //    alert("加载失败");
+              // }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
        },
       watch:{
       '$route':'fetchData'
@@ -55,7 +81,7 @@ import { getStore } from 'store/storage'
            this.isShow=false;
            this.ADD_LIVE({
              imgLocation:'static/imgs/cover2.jpg',
-             videoName:this.messages.name,
+             channelName:this.messages.name,
              playNum:0,
              viewNum:0
            });
@@ -63,6 +89,11 @@ import { getStore } from 'store/storage'
         fetchData:function(){
             console.log(this.$route)
             this.title=this.$route.params.nameId
+           // this.channelId=this.$route.params.channelId
+            //localStorage.removeItem('channelId')
+            if(this.$route.params.channelId){
+            localStorage.setItem('channelId',this.$route.params.channelId);
+            }
         },
         toLive:function(name){
            console.log(name)

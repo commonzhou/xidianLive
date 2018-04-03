@@ -70,7 +70,7 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
                   // window.location.href="/#/newmain";
                 }
                 else{
-                  alert("sb，用户名或者密码不对啊")
+                  alert("用户名或者密码不对啊")
                 }
                 }
              ).catch(function(err){
