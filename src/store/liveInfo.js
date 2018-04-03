@@ -20,7 +20,12 @@ class liveInfo extends BaseModule{
   }
   getVedioInChannel(channelId){
     return this.get(`/video/getVideoInChannel?channelId=${channelId}`)
-  }  
+  }
+  getMobileLiveInfo (id) {
+    return this.post(`/mobile/livePlay`, {
+      channelId: id
+    })
+  }
 }
 
 export default new liveInfo();
