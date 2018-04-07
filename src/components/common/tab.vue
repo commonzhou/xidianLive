@@ -6,7 +6,7 @@
               <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">学术直播</router-link>
           </div>
           <div class="h-sub">
-             <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link>
+             <!-- <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link> -->
              <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(2)" :class="{active:choosePage===2}">视频中心</router-link>
              <router-link tag='div' class="tab-item" to="/manage" @click="changePage(3)" :class="{active:choosePage===3}">后台管理</router-link>
           </div>

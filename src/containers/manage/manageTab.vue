@@ -6,7 +6,7 @@
               <router-link tag='div' class="tab-item" to="/manage" @click="changePage(1)" :class="{active:choosePage===1}">后台管理系统</router-link>
           </div>
           <div class="h-sub">
-             <router-link tag='div' class="tab-item" to="/manage" @click="changePage(1)" :class="{active:choosePage===1}">管理平台</router-link>
+             <!-- <router-link tag='div' class="tab-item" to="/manage" @click="changePage(1)" :class="{active:choosePage===1}">管理平台</router-link> -->
              <router-link tag='div' class="tab-item" to="/main" @click="changePage(2)" :class="{active:choosePage===2}">直播前台</router-link>
           </div>
           <div class="h-aside">
