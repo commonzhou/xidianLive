@@ -1,15 +1,12 @@
 var express = require('express')
 var config = require('./config')
-var bodyParser = require('body-parser')
 var exec = require('child_process').exec
 var fs = require('fs')
 
 var server = express()
-server.use(bodyParser.json())
 var pulling = false
 
 server.post('/payload', function (req, res) {
-  console.log(req.body)
   if (pulling) return res.status(500).send({
       message: 'Server is pulling code!'
     })
