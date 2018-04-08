@@ -41,42 +41,75 @@
 
 <script type="text/ecmascript-6">
 import Tab from 'components/common/tab'
-import liveInfo from 'store/liveInfo.js'
+import liveHandler from 'store/liveInfo.js'
     export default{
         data(){
             return{
-                name:""   //name刷新了就没有了，因此需要存储cookie和localStorage
+                name:"",   //name刷新了就没有了，因此需要存储cookie和localStorage
+                videoPic:"",
+                videoUrl:""
             }
         },
       components:{                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
          Tab
       },
     created(){
-       this.fetchData()
+       this.fetchData();
+       var that=this;
+         liveHandler.getLiveInfo({
+                "userId":'457cfd7ddaef41969f7fa90b56d1a5a1',
+                "token":'',
+                "channelId":localStorage.getItem('channelId'),
+                "liveId":localStorage.getItem('liveId')
+                }).then(function(res){
+
+                if(res.data.retureValue==0){
+                 // alert('成功')
+                    var videoInfo=res.data.retureData; 
+                    that.videoPic=videoInfo.coverPicture;
+                    that.videoUrl=videoInfo.flvPlayUrl;
+                    console.log(videoInfo.flvPlayUrl)
+
+                      let player=new TcPlayer("movie",{
+                          "m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
+                          "autoplayer":true,
+                          "coverpic":{style:"cover",src:"https://118.89.112.125:8443/xidian_live-0.0.1/"+that.videoPic},
+                          "width":"100%"
+                     })
+                }
+                else{
+                  //alert("失败")
+                  console.log("不知名错误");
+                }
+                }).catch(
+                  function(err){
+                    console.log(err);
+                   // alert("创建失败.");
+                  }
+                );
+
        },
       watch:{
       '$route':'fetchData'
       },
-      mounted:function(){
-        this.$nextTick(function(){
-           let player=new TcPlayer("movie",{
-     "m3u8":"http://v2v.cc/~j/theora_testsuite/320x240.ogg",
-     "autoplayer":true,
-     "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
-     "width":"100%"
-        })
-      })
-      },
+      //   一开始将视频初始化放在这里，但是由于视频的路径等参数尚在ajax的路上，所以会GG
+
+    //   mounted:function(){
+    //     var that=this;
+    //     this.$nextTick(function(){
+    //       console.log(this.videoUrl)
+    //        let player=new TcPlayer("movie",{
+    //  "m3u8":that.videoUrl,
+    //  "autoplayer":true,
+    //  "coverpic":{style:"cover",src:"https://118.89.112.125:8443/xidian_live-0.0.1/"+that.videoPic},
+    //  "width":"100%"
+    //     })
+    //   })
+    //   },
       methods:{
-        getLiveInfo:function(){
-          liveInfo.getLiveInfo({}).then(function(res){
-            console.log(res)
-          }).catch(function(err){
-            console.log(err)
-          })
-        },
          fetchData:function(){
-            this.name=this.$route.params.nameId
+            this.name=this.$route.params.nameId,
+            localStorage.setItem('liveId',this.$route.params.liveId)
         }
       }
     }
@@ -121,8 +154,13 @@ import liveInfo from 'store/liveInfo.js'
           flex:1
           width: 100%
           margin:0 0 1rem 0
-          background-color: #FCFAF2
+          background-color: #fff
+          border:1px solid gray
           text-align left
+          padding:5px;
+          &:hover
+            transform: translateY(-3px);
+            box-shadow: 1px 1px 20px #999;
         .section:last-child
           margin-bottom:0
 </style>

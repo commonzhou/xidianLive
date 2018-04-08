@@ -4,7 +4,7 @@
        <Shelf :title="title">
        </Shelf>
       <div  class="homevideo" > 
-        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.channelName)"></videoCard>
+        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.channelName,item.liveId)"></videoCard>
        </div>
         <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
      </section>
@@ -96,9 +96,9 @@ import liveHandler from 'store/liveinfo.js'
             localStorage.setItem('channelId',this.$route.params.channelId);
             }
         },
-        toLive:function(name){
-           console.log(name)
-           this.$router.push({name:'viewVideo',params:{nameId:name}});
+        toLive:function(name,liveId){
+           console.log(name,liveId)
+           this.$router.push({name:'viewVideo',params:{nameId:name,liveId:liveId}});
         }
       }
     }
