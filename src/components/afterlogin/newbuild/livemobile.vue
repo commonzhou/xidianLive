@@ -52,6 +52,12 @@
 <script type="text/ecmascript-6">
   import liveInfo from 'store/liveInfo.js'
   export default {
+    props: {
+      channelId: {
+        type: String,
+        default: ''
+      }
+    },
     data() {
       return {
         activeName: 'first',
@@ -69,7 +75,19 @@
         window.location.href = "/#/livemobilelarge"
       },
       liveDetailMobile() {
-        liveInfo.getMobileLiveInfo('249df10bb4d344aea95d65845d684d5b').then(response => {
+        let channelId
+        if (location.search) {
+          let search = location.search.slice(1).split('&')
+          for (let kv of search) {
+            let kvArray = kv.split('=')
+            if (kvArray[0]==='channelId') {
+              channelId = kvArray[1]
+            }
+          }
+        }
+        channelId = channelId || this.channelId
+        // channelId=249df10bb4d344aea95d65845d684d5b
+        liveInfo.getMobileLiveInfo(channelId).then(response => {
           console.log(response)
           if (response.data.retureValue === 0) {
             this.liveDetails = response.data.retureData
