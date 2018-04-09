@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import Index from 'containers/index'
 import main from 'containers/main/main'
 import scene from 'components/scene/scene'
-import purchase from 'components/purchase/purchase'
+import purchase from 'containers/manage/manageDetail/purchase'
 import livecase from 'components/livecase/livecase'
 import displayvideo from 'containers/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
@@ -24,7 +24,6 @@ import viewMobile from 'components/common/viewMobile'            //视频手机�
 
 
 
-import newmain from 'components/newmain/newmain'
 import newbuild from 'components/afterlogin/newbuild/newbuild'
 import media from 'components/afterlogin/media/media'
 
@@ -54,7 +53,6 @@ export default new Router({
       redirect: '/main',
       children: [
         {path: 'main', component: main},
-        {path: 'purchase', component: purchase},
         {path: 'register', name: 'register', component: register},
         {path: 'login', name:"login",component:login},
         {path: 'message',name:'message',component:message}
@@ -101,11 +99,6 @@ export default new Router({
       path:'/personal',
       name:'personal',
       component:personal
-    },
-    {
-      path:'/newmain',
-      name:'newmain',
-      component:newmain
     },
     {
       path:'/channel1',

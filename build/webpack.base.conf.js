@@ -30,7 +30,8 @@ module.exports = {
       "containers":resolve("src/containers"),
       "assets":resolve("src/assets"),
       "store":resolve("src/store"),
-      "actionStore":resolve("src/actionStore")
+      "actionStore":resolve("src/actionStore"),
+      "imgs":resolve("static/imgs")
     }
   },
   module: {
@@ -44,6 +45,10 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
+      },
+      {
+        test: /\.styl$/,
+        loaders: ['style', 'css', 'stylus']
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

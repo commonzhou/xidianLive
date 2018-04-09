@@ -3,7 +3,7 @@
        <div class="banner">
          <div class="bg" ref="bg" @mouseover="bgOver($refs.bg)"
             @mousemove="bgMove($refs.bg,$event)"
-            @mouseout="bgOut($refs.bg)">
+            @mouseout="bgOut($refs.bg)" style="background:url('static/imgs/starry.jpg')">
         <!-- <img   scr="~assets/imgs/fanshao/starry.jpg"  /> -->
           <span class="img a"></span>
           <!-- <img src="~assets/imgs/fanshao/starry.jpg" alt=""> -->
@@ -139,7 +139,7 @@ import goTop from 'components/common/goTop'
     height: 500px;
     margin: 20px auto;
     margin-top:40px;
-    background: url("~assets/imgs/fanshao/starry.jpg") center no-repeat;
+    background: center no-repeat;
     background-size: 100% 100%;
     border-radius: 10px;
     transform-style: preserve-3d;
