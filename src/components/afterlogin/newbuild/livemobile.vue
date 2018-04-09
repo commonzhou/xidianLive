@@ -75,18 +75,7 @@
         window.location.href = "/#/livemobilelarge"
       },
       liveDetailMobile() {
-        let channelId
-        if (location.search) {
-          let search = location.search.slice(1).split('&')
-          for (let kv of search) {
-            let kvArray = kv.split('=')
-            if (kvArray[0]==='channelId') {
-              channelId = kvArray[1]
-            }
-          }
-        }
-        channelId = channelId || this.channelId
-        // channelId=249df10bb4d344aea95d65845d684d5b
+        let channelId = this.$route.query.channelId || this.channelId
         liveInfo.getMobileLiveInfo(channelId).then(response => {
           console.log(response)
           if (response.data.retureValue === 0) {
@@ -101,6 +90,7 @@
               this.liveDetails.durationHours = Math.floor(duration / 60)
               this.liveDetails.durationMinutes = Math.round(duration % 60)
             }
+            console.log(this.liveDetails.hlsPlayUrl)
             let player = new TcPlayer("movie", {
               "m3u8": this.liveDetails.hlsPlayUrl,
               "autoplayer": true,
