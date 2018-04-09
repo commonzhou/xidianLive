@@ -102,7 +102,7 @@
               this.liveDetails.durationMinutes = Math.round(duration % 60)
             }
             let player = new TcPlayer("movie", {
-              "m3u8": "http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
+              "m3u8": this.liveDetails.hlsPlayUrl,
               "autoplayer": true,
               "coverpic": "http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg",
               "width": "100%"
