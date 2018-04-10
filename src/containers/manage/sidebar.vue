@@ -48,6 +48,12 @@
                     path:['/system'],
                     nickname:'system'
                 }, {
+                    name:'媒体中心',
+                    list:'全部视频',
+                    show:false,
+                    path:'',
+                    nickname:''
+                },{
                     name: '订单管理',
                     list: ['套餐购买','订单记录','账户余额'],
                     show: false,
@@ -118,7 +124,7 @@ a{
     text-decoration: none;
     display: block;
     padding: 18px 0 18px 0;
-    font-size: 16px;
+    font-size: 18px;
     outline: 0;
     -webkit-transition: all 200ms ease-in;
     -moz-transition: all 200ms ease-in;

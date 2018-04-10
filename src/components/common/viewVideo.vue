@@ -10,28 +10,24 @@
         </div>     
         <div class="aside">
           <div class="section">
-             <div id="info">直播信息</div>
-             <div>直播名称：冯提莫直播间</div>
-             <div>开始时间：2017-11-26  19:00</div>
-             <div>结束时间：2017-11-26  19:00</div>
-             <div>活动地点：冯提莫直播间</div>
-             <div>活动介绍：XXXXXXXXXXX</div>
+             <div>直播名称：{{liveTitle}}</div>
+             <div>开始时间：{{startTime}}</div>
+             <div>结束时间：{{endTime}}</div>
+             <div>活动地点：{{liveLocation}}</div>
+             <div>活动介绍：{{liveInfo}}</div>
           </div>
             <div class="section">
             <div>直播地址</div>
-            <div>XXXXXXXXXXXXXXXX 复制</div>
+            <div>{{videoUrl}}</div>
             <div>分流地址</div>
-            <div>XXXXXXXXXXXXXXXX 复制</div>
-            <div>手机端直播地址</div>
+            <div>{{pushUrl}}}</div>
             <div>
                <router-link to="/livemobile" tag="div" class="mobile">前往手机端</router-link>
             </div>  
           </div>
           <div class="section">
              <div>节目单</div>
-             <div>1.《xxxx》</div>
-             <div>1.《xxxx》</div>
-             <div>1.《xxxx》</div>
+                <div  :key="i" v-for="(item,i) in schduledList">{{item}}</div>
           </div>
         </div>
        
@@ -47,7 +43,14 @@ import liveHandler from 'store/liveInfo.js'
             return{
                 name:"",   //name刷新了就没有了，因此需要存储cookie和localStorage
                 videoPic:"",
-                videoUrl:""
+                videoUrl:"",
+                liveTitle:'',
+                startTime:'',
+                endTime:'',
+                liveLocation:'',
+                liveInfo:'',
+                pushUrl:'',
+                schduledList:''
             }
         },
       components:{                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -68,7 +71,15 @@ import liveHandler from 'store/liveInfo.js'
                     var videoInfo=res.data.retureData; 
                     that.videoPic=videoInfo.coverPicture;
                     that.videoUrl=videoInfo.flvPlayUrl;
-                    console.log(videoInfo.flvPlayUrl)
+                    that.liveTitle=videoInfo.title;
+                    that.startTime=videoInfo.startTime;
+                    that.endTime=videoInfo.endTime;
+                    that.liveLocation=videoInfo.location;
+                    that.liveInfo=videoInfo.introduction;
+                    that.pushUrl=videoInfo.pushUrl;
+                    that.schduledList=videoInfo.schduledList;
+
+                    //console.log(videoInfo)
 
                       let player=new TcPlayer("movie",{
                           "m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
@@ -107,9 +118,12 @@ import liveHandler from 'store/liveInfo.js'
     //   })
     //   },
       methods:{
-         fetchData:function(){
-            this.name=this.$route.params.nameId,
-            localStorage.setItem('liveId',this.$route.params.liveId)
+         fetchData:function(){ 
+           //console.log(this.$route.params);
+           if(this.$route.params.nameId){       // 为空的时候不重新设置各种ID，比如从手机端返回，这里可能为空，因为路径跳转没有带参数
+              this.name=this.$route.params.nameId,
+              localStorage.setItem('liveId',this.$route.params.liveId)
+           } 
         }
       }
     }
@@ -157,7 +171,9 @@ import liveHandler from 'store/liveInfo.js'
           background-color: #fff
           border:1px solid gray
           text-align left
-          padding:5px;
+          padding:10px;
+          white-space: pre-wrap;      //保留空白符序列，但是正常地进行换行。
+          word-wrap:break-word;       //在长单词或 URL 地址内部进行换行
           &:hover
             transform: translateY(-3px);
             box-shadow: 1px 1px 20px #999;
