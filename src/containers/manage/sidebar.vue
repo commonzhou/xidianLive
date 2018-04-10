@@ -49,7 +49,7 @@
                     nickname:'system'
                 }, {
                     name:'媒体中心',
-                    list:'全部视频',
+                    list:['全部视频'],
                     show:false,
                     path:'',
                     nickname:''
