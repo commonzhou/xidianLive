@@ -22,7 +22,7 @@
             <div>分流地址</div>
             <div>{{pushUrl}}}</div>
             <div>
-               <router-link to="/livemobile" tag="div" class="mobile">前往手机端</router-link>
+               <router-link  :to="{ path: 'viewMobile', query: { channelId: channelId}}" tag="div" class="mobile">前往手机端</router-link>
             </div>  
           </div>
           <div class="section">
@@ -50,7 +50,8 @@ import liveHandler from 'store/liveInfo.js'
                 liveLocation:'',
                 liveInfo:'',
                 pushUrl:'',
-                schduledList:''
+                schduledList:'',
+                channelId:""
             }
         },
       components:{                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -58,6 +59,7 @@ import liveHandler from 'store/liveInfo.js'
       },
     created(){
        this.fetchData();
+       this.channelId=localStorage.getItem('channelId');
        var that=this;
          liveHandler.getLiveInfo({
                 "userId":'457cfd7ddaef41969f7fa90b56d1a5a1',
