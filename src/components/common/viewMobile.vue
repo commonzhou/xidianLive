@@ -95,7 +95,7 @@
             let player = new TcPlayer("movie", {
               "m3u8": this.liveDetails.hlsPlayUrl,
               "autoplayer": true,
-              "coverpic": "http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg",
+              "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
               "width": "100%"
             })
           }

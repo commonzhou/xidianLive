@@ -72,7 +72,7 @@ import liveHandler from 'store/liveInfo.js'
                  // alert('成功')
                     var videoInfo=res.data.retureData; 
                     that.videoPic=videoInfo.coverPicture;
-                    that.videoUrl=videoInfo.flvPlayUrl;
+                    that.videoUrl=videoInfo.hlsPlayUrl;
                     that.liveTitle=videoInfo.title;
                     that.startTime=videoInfo.startTime;
                     that.endTime=videoInfo.endTime;
@@ -85,8 +85,9 @@ import liveHandler from 'store/liveInfo.js'
 
                       let player=new TcPlayer("movie",{
                           "m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
+                          //"m3u8":that.videoUrl,
                           "autoplayer":true,
-                          "coverpic":{style:"cover",src:"https://118.89.112.125:8443/xidian_live-0.0.1/"+that.videoPic},
+                          "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
                           "width":"100%"
                      })
                 }
