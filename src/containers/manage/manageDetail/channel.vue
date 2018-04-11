@@ -110,8 +110,8 @@ import channelHandle from 'store/Channel.js'
       width:25%
   .button{
     position:absolute;
-    top:139px;
-    left:90%;
+    top:145px;
+    left:78%;
     z-index:20;
   }
   .input{

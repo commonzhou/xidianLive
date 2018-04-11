@@ -10,6 +10,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 // /* eslint-disable no-new */
 //构建不需要登陆的界面的白名单
+localStorage.removeItem('userName');
 const whiteList=['/main','/login','/register','/displayvideo']
 router.beforeEach(function(to,from,next){   // 注册一个全局前置守卫
 if(!store.state.login){     //如果用户没有登陆，那么只可以访问白名单里的页面

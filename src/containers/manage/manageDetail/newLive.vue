@@ -124,8 +124,8 @@ import liveHandler from 'store/liveinfo.js'
       width:25%
   .button{
     position:absolute;
-    top:179px;
-    left:90%;
+    top:185px;
+    left:80%;
     z-index:20;
   }
    .input{
