@@ -4,12 +4,14 @@
        <section class="mt30 clearfix">
        <Shelf title="频道一览">
        </Shelf>
+         <Button text="新建频道"  @btnClick="newchannel" class="button"></Button>
+         <channelInput v-show="isShow" v-on:message="handleMessage" class="input"></channelInput>
       <div  class="homevideo" > 
         <videoCard :msg="item" :key="i" v-for="(item,i) in videoList" @cardClick="toLive(item.channelName,item.channelId)"></videoCard>
        </div>
-        <channelInput v-show="isShow" v-on:message="handleMessage"></channelInput>
+       
      </section>
-     <Button text="新建频道"  @btnClick="newchannel" class="button"></Button>
+    
     
   </div>
 </template>
@@ -107,7 +109,15 @@ import channelHandle from 'store/Channel.js'
       flex 1
       width:25%
   .button{
-    margin:0 auto
-    margin-left:280px
+    position:absolute;
+    top:139px;
+    left:90%;
+    z-index:20;
+  }
+  .input{
+    position absolute;
+    left:60%;
+    top:55%;
+    transform: translate(-50%,-50%);
   }
 </style>

@@ -3,12 +3,14 @@
      <section class="mt30 clearfix">
        <Shelf :title="title">
        </Shelf>
+          <Button text="新建直播"  @btnClick="newlive" class="button"></Button>
+           <liveInput v-show="isShow" v-on:newlive="handlelive" class="input"></liveInput>
       <div  class="homevideo" > 
         <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.channelName,item.liveId)"></videoCard>
        </div>
-        <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
+       
      </section>
-     <Button text="新建直播"  @btnClick="newlive" class="button"></Button>
+  
     
   </div>
 </template>
@@ -121,7 +123,16 @@ import liveHandler from 'store/liveinfo.js'
       flex 1
       width:25%
   .button{
-    margin:0 auto
-    margin-left:280px
+    position:absolute;
+    top:179px;
+    left:90%;
+    z-index:20;
+  }
+   .input{
+    position absolute;
+    left:60%;
+    top:55%;
+    transform: translate(-50%,-50%);
+    z-index:10;
   }
 </style>
