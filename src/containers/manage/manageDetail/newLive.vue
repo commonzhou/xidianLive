@@ -120,8 +120,7 @@ import liveHandler from 'store/liveinfo.js'
     display flex
     flex-wrap: wrap 
     >div
-      flex 1
-      width:25%
+      flex 0 0 25%                   //这样的好处是，就算一行只有一个div，也会只分布25%，不会自动扩展到整个那么长
   .button{
     position:absolute;
     top:185px;
@@ -130,7 +129,7 @@ import liveHandler from 'store/liveinfo.js'
   }
    .input{
     position absolute;
-    left:60%;
+    left:50%;
     top:55%;
     transform: translate(-50%,-50%);
     z-index:10;

@@ -6,10 +6,10 @@
     <el-input v-model="ruleForm.name" placeholder="请输入手机号码"  class="item item1"></el-input>
   </el-form-item>
   <el-form-item  prop="secret1">
-    <el-input v-model="ruleForm.secret1" placeholder="请输入密码"  class="item"></el-input>
+    <el-input v-model="ruleForm.secret1" placeholder="请输入密码"  class="item"  type="password"></el-input>
   </el-form-item>
   <el-form-item  prop="secret2">
-    <el-input v-model="ruleForm.secret2" placeholder="请确认密码"  class="item"></el-input>
+    <el-input v-model="ruleForm.secret2" placeholder="请确认密码"  class="item"  type="password"></el-input>
   </el-form-item>
    <el-form-item  prop="graph">
     <el-input v-model="ruleForm.graph" placeholder="请输入图形验证码"  class="item"></el-input>

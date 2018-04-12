@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 // /* eslint-disable no-new */
 //构建不需要登陆的界面的白名单
-localStorage.removeItem('userName');
+
 const whiteList=['/main','/login','/register','/displayvideo']
 router.beforeEach(function(to,from,next){   // 注册一个全局前置守卫
 if(!store.state.login){     //如果用户没有登陆，那么只可以访问白名单里的页面
@@ -20,7 +20,7 @@ if(!store.state.login){     //如果用户没有登陆，那么只可以访问�
     // 如果路径在白名单里，肯定不需要登录就可以访问，如果不在，但是来自或者通向 视频中心的子页面，那么这也是被允许的，不知道在whiteList怎么写 :=(
      next()
   }
-  else if(localStorage.getItem('userName')){         //防止刷新后，自动退出了登录状态...
+  else if(sessionStorage.getItem('userName')){         //防止刷新后，自动退出了登录状态...; 但是关闭页面重新进入的时候，需要再一次登录，localStorage则会在退出重新进入的时候保持登陆状态
     next();
   }
   else{

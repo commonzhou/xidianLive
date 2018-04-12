@@ -45,14 +45,14 @@
                     name: '授权观看',
                     list: ['用户组观看', '付费观看','授权码观看'],
                     show: false,
-                    path:['/system'],
-                    nickname:'system'
+                    path:['/auth'],
+                    nickname:'auth'
                 }, {
                     name:'媒体中心',
                     list:['全部视频'],
                     show:false,
-                    path:'',
-                    nickname:''
+                    path:['/mediaManage'],
+                    nickname:'mediaManage'
                 },{
                     name: '订单管理',
                     list: ['套餐购买','订单记录','账户余额'],

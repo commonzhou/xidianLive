@@ -11,13 +11,15 @@ import login from 'containers/login/login'
 import message from 'containers/message/message'
 import manage from 'containers/manage/manage'                    //通往管理页面
 import document from 'containers/manage/manageDetail/document'   //管理界面文档介绍
-import admin from 'containers/manage/manageDetail/admin'
+import admin from 'containers/manage/admin/admin'                // 个人中心
 import channel from 'containers/manage/manageDetail/channel'     //管理频道，可新建频道
 import newLive from 'containers/manage/manageDetail/newLive'     //管理直播，可新建直播
-import system from 'containers/manage/manageDetail/system'
+import auth from 'containers/manage/auth/auth'                   //用户组管理授权
+import authUser from 'containers/manage/auth/authUser'           //用户组内部用户管理
 import count from 'containers/manage/count/count'                //直播数据页面
 import dianbo from 'containers/manage/count/dianbo'              //点播数据页面
 import form from 'containers/manage/count/form'                  //观看直播的用户表单统计
+import mediaManage from 'containers/manage/media/media'          //管理后台界面的媒体库
 import error from 'containers/error'                             //404页面
 import viewVideo from 'components/common/viewVideo'              //视频pc端播放
 import viewMobile from 'components/common/viewMobile'            //视频手机端播放
@@ -65,14 +67,16 @@ export default new Router({
        redirect:'/channel',
        children:[
          {path:'/document',name:'document',component:document},
-         {path:'/admin',name:'admin',component:error},
+         {path:'/admin',name:'admin',component:admin},
          {path:'/channel',name:'channel',component:channel},
-         {path:'/system',name:'system',component:error},
+         {path:'/auth',name:'auth',component:auth},
+         {path:'/authUser',name:'authUser',component:authUser},
          {path:'/count',name:'count',component:count},
          {path:'/dianbo',name:'dianbo',component:dianbo},
          {path:'/form',name:'form',component:form},
          {path:'/newLive',name:'newLive',component:newLive},
-         {path:'/purchase',name:'purchase',component:purchase}
+         {path:'/purchase',name:'purchase',component:purchase},
+         {path:'/mediaManage',name:'mediaManage',component:mediaManage}
        ]
     },
     {

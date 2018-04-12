@@ -106,8 +106,7 @@ import channelHandle from 'store/Channel.js'
     display flex
     flex-wrap: wrap 
     >div
-      flex 1
-      width:25%
+      flex 0 0 25%
   .button{
     position:absolute;
     top:145px;
@@ -116,7 +115,7 @@ import channelHandle from 'store/Channel.js'
   }
   .input{
     position absolute;
-    left:60%;
+    left:50%;
     top:55%;
     transform: translate(-50%,-50%);
   }

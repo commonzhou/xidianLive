@@ -6,7 +6,7 @@
     <el-input  v-model="ruleForm2.name" auto-complete="off" placeholder="手机号"></el-input>
   </el-form-item>
   <el-form-item  prop="pass" class="item">
-    <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"></el-input>
+    <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"  type="password"></el-input>
   </el-form-item>
   <el-form-item  prop="graph" class="item">
     <el-input v-model="ruleForm2.graph" placeholder="请输入数字验证码"  class=" item2"></el-input>
@@ -36,7 +36,7 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
   export default {
     data() {
        var validateCode = (rule, value, callback) => {
-        if (value!=this.checkCode) {
+        if (value.toLocaleUpperCase()!=this.checkCode) {
           callback(new Error('请输入验证码'));
         } 
         else {
