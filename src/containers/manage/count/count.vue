@@ -43,7 +43,7 @@ import 'echarts/map/js/china.js';
 // 引入提示框和标题组件
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
-
+import info from 'store/liveInfo.js'
     export default{
       data(){
            return{
@@ -55,6 +55,50 @@ require('echarts/lib/component/title');
       },
       methods:{
        
+      },
+      created(){
+         
+         var that=this;
+         info.liveUserData({'liveId':'123'}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                that.$store.state.allMedia=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   that.$store.state.allMedia.push(temp);
+                }
+              }
+              else{
+                 alert("加载失败");
+              }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
+
+
+           info.liveData({"liveId":"123"}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                that.$store.state.allMedia=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   that.$store.state.allMedia.push(temp);
+                }
+              }
+              else{
+                 alert("加载失败");
+              }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
       },
       mounted(){
 // 基于准备好的dom，初始化echarts实例

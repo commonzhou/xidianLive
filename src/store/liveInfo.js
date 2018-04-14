@@ -1,5 +1,5 @@
 // 直播相关的ajax模块
-//PC Mobile的直播相关模块都算在这里
+//PC Mobile的直播相关模块都算在这里,echart获取的也在里面
 import BaseModule from './BaseModule'
 class liveInfo extends BaseModule{
   constructor(){
@@ -25,6 +25,16 @@ class liveInfo extends BaseModule{
     return this.post(`/mobile/livePlay`, {
       channelId: id
     })
+  }
+  // 直播\点播信息相关
+  liveUserData(data){
+    return this.post('/live/userListStatistics',data)
+  }
+  liveData(data){
+    return this.post('/live/liveStatistics',data)
+  }
+  dianboData(data){
+    return this.post('/record/video',data)
   }
 }
 

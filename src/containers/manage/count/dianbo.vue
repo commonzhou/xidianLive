@@ -17,6 +17,7 @@ require('echarts/lib/chart/line');
 require('echarts/lib/component/tooltip');
 require('echarts/lib/component/title');
 import Shelf from 'components/common/shelf';
+import media from 'store/liveInfo.js'
     export default{
       data(){
            return{
@@ -29,6 +30,29 @@ import Shelf from 'components/common/shelf';
       methods:{
        
       },
+      // created(){
+      //    var user=localStorage.getItem('userName');
+      //    var that=this;
+      //    channelHandle.getChannelList({"userId":user}).then(function(res){
+      //         if(res.data.retureValue==0){
+      //           console.log(res.data.retureData);
+      //           that.$store.state.videoList=[];
+      //           for(let i=0;i<res.data.retureData.length;i++){
+      //              let temp=res.data.retureData[i];
+      //              if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+      //              if(!temp.playNum) temp.playNum=100;
+      //              if(!temp.viewNum) temp.viewNum=50;
+      //              that.$store.state.videoList.push(temp);
+      //           }
+      //         }
+      //         else{
+      //            alert("加载失败");
+      //         }
+      //    }).catch(function(err){
+      //        console.log(err);
+      //        alert("加载失败.");
+      //    });
+      // },
       mounted(){
 // 基于准备好的dom，初始化echarts实例
 var myChart1 = echarts.init(document.getElementById('timePeople'));

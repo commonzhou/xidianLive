@@ -19,6 +19,7 @@ import Shelf from 'components/common/shelf'
 import videoCard from 'components/common/videoCard'
 import Button from 'components/common/button'
 import { mapMutations, mapState } from 'vuex'
+import info from 'store/Channel.js'
     export default{
       name:'purchase',
       data(){
@@ -37,6 +38,29 @@ import { mapMutations, mapState } from 'vuex'
         ...mapState(
           ['allMedia']
         )
+      },
+      created(){
+         
+         var that=this;
+         info.getAllMedia().then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                that.$store.state.allMedia=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   that.$store.state.allMedia.push(temp);
+                }
+              }
+              else{
+                 alert("加载失败");
+              }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
       }
     }
 </script>
