@@ -76,19 +76,19 @@
     color:white
   }
    .h-title
-      flex 0 0 75%
+      flex 0 0 80%
       flex-grow:1
       height: 100%
       text-align:left  
       font-size:1.8rem
       div 
         margin-top:2vh
-        margin-left:3vw
+        margin-left:1vw
         cursor:pointer
         &:hover
           color:#2EA9DF
    .h-logo
-      flex:0 0 10%;
+      flex:0 0 5%;
       display flex
       justify-content center
       align-content center
@@ -96,7 +96,7 @@
       font-size:1.2rem
       div
         margin-top:2vh
-        margin-right:5vw
+        margin-left:1vw
         cursor:pointer
         &:hover
           color:#2EA9DF

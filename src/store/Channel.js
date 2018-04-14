@@ -18,8 +18,8 @@ class Channel extends BaseModule{
   getVedioInChannel(channelId){
       return this.get(`/video/getVideoInChannel?channelId=${channelId}`)
   }
-  getAllMedia(){
-    return this.get(`/0.1/video/list?userId=f812bda13c8f485f83ebe7637cd9bfa0&page=1&size=10&type=all&sort=0`)
+  getAllMedia(id){
+    return this.get(`/0.1/video/list?userId=${id}&page=1&size=10&type=all&sort=0`)
   }
 }
 

@@ -80,7 +80,7 @@ import info from 'store/liveInfo.js'
          });
 
 
-           info.liveData({"liveId":"123"}).then(function(res){
+           info.liveData({"liveId":"a27680916b2c493dacf894c7b42bcef"}).then(function(res){
               if(res.data.retureValue==0){
                 console.log(res.data.retureData);
                 that.$store.state.allMedia=[];

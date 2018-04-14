@@ -42,7 +42,7 @@ import info from 'store/Channel.js'
       created(){
          
          var that=this;
-         info.getAllMedia().then(function(res){
+         info.getAllMedia('f812bda13c8f485f83ebe7637cd9bfa0').then(function(res){
               if(res.data.retureValue==0){
                 console.log(res.data.retureData);
                 that.$store.state.allMedia=[];
@@ -70,7 +70,7 @@ import info from 'store/Channel.js'
      height: 60px;
      line-height: 60px;
      font-size 26px;
-     text-align center;
+     text-align left;
      .w
        display: flex;
        align-items: center;

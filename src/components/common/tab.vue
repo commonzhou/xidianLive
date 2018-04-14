@@ -3,7 +3,7 @@
     <div>
         <header class="h-box">
           <div class="h-logo">
-              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">学术直播</router-link>
+              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">青葱直播</router-link>
           </div>
           <div class="h-sub">
              <!-- <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link> -->
