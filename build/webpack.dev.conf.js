@@ -10,7 +10,8 @@ const portfinder = require('portfinder')
 
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
-const context=[`/user/*`, '/mobile/*']
+const context=[`/user/*`, '/mobile/*', '/0.1/**']
+console.log(context)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -33,9 +34,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       : false,
     publicPath: config.dev.assetsPublicPath,
     proxy: [{
-      context:context,
-      target:'https://118.89.112.125:8443/xidian_live-0.0.1',
-      changeOrigin:true,
+      context: context,
+      target: 'https://118.89.112.125:8443/xidian_live-0.0.1',
+      changeOrigin: true,
       secure: false
     }],
   //   proxy:{
