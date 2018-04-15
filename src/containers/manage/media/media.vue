@@ -42,25 +42,25 @@ import info from 'store/Channel.js'
       created(){
          
          var that=this;
-         info.getAllMedia('f812bda13c8f485f83ebe7637cd9bfa0').then(function(res){
-              if(res.data.retureValue==0){
-                console.log(res.data.retureData);
-                that.$store.state.allMedia=[];
-                for(let i=0;i<res.data.retureData.length;i++){
-                   let temp=res.data.retureData[i];
-                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
-                   if(!temp.playNum) temp.playNum=100;
-                   if(!temp.viewNum) temp.viewNum=50;
-                   that.$store.state.allMedia.push(temp);
-                }
-              }
-              else{
-                 alert("加载失败");
-              }
-         }).catch(function(err){
-             console.log(err);
-             alert("加载失败.");
-         });
+        //  info.getAllMedia('f812bda13c8f485f83ebe7637cd9bfa0').then(function(res){
+        //       if(res.data.retureValue==0){
+        //         console.log(res.data.retureData);
+        //         that.$store.state.allMedia=[];
+        //         for(let i=0;i<res.data.retureData.length;i++){
+        //            let temp=res.data.retureData[i];
+        //            if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+        //            if(!temp.playNum) temp.playNum=100;
+        //            if(!temp.viewNum) temp.viewNum=50;
+        //            that.$store.state.allMedia.push(temp);
+        //         }
+        //       }
+        //       else{
+        //          alert("加载失败");
+        //       }
+        //  }).catch(function(err){
+        //      console.log(err);
+        //      alert("加载失败.");
+        //  });
       }
     }
 </script>

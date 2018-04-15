@@ -96,8 +96,11 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
                 function(res){
                 console.log(res);
                 if(res.data.retureValue==0){
-                  setStore("userName",that.ruleForm2.name);
-                  setStore("password",that.ruleForm2.pass);
+                  //setStore("userName",that.ruleForm2.name);
+                  //setStore("password",that.ruleForm2.pass);
+                  sessionStorage.setItem('userName',that.ruleForm2.name);
+                  sessionStorage.setItem('password',that.ruleForm2.pass);
+                  sessionStorage.setItem('userId',res.data.retureData.userId);
                   that.$store.state.login=true;
                   that.$router.push('/main');
                   // window.location.href="/#/newmain";

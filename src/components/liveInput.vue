@@ -41,8 +41,9 @@ export default {
       }
       else{
          var that=this;
+         var userId=sessionStorage.getItem('userId');
          liveHandler.createNewLive({
-                "userId":'457cfd7ddaef41969f7fa90b56d1a5a1',
+                "userId":userId,
                 "token":'',
                 "channelId":localStorage.getItem('channelId'),
                 "liveName":this.name,

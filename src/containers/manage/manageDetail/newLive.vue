@@ -44,10 +44,11 @@ import liveHandler from 'store/liveinfo.js'
        this.title=localStorage.getItem('liveTitle');
        var that=this;
        var channel=localStorage.getItem('channelId');
+        that.$store.state.liveList=[];
        liveHandler.getLiveChannel({"channelId":channel}).then(function(res){
               if(res.data.retureValue==0){
                 console.log(res.data.retureData);
-                 that.$store.state.liveList=[];
+                
                 for(let i=0;i<res.data.retureData.length;i++){
                    let temp=res.data.retureData[i];
                    if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
@@ -63,7 +64,7 @@ import liveHandler from 'store/liveinfo.js'
               // }
          }).catch(function(err){
              console.log(err);
-             alert("加载失败.");
+            // alert("加载失败.");
          });
        },
       watch:{

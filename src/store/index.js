@@ -7,7 +7,7 @@ Vue.use(Vuex);
 const state={
     login:false,  //is login
     userInfo:null,
-    videoList:[
+    videoList:[                   //直播列表
         //    {
         //     imgLocation:"static/imgs/cover1.jpg",
         //     videoName:"晚会频道",
@@ -27,7 +27,7 @@ const state={
         //     viewNum:'11'
         //    }
     ],
-    liveList:[
+    liveList:[                        //频道列表
         // {
         //     imgLocation:"static/imgs/cover1.jpg",
         //     videoName:"晚会直播",
@@ -41,7 +41,7 @@ const state={
         //     viewNum:'117'
         //     }
     ],
-    allMedia:[
+    allMedia:[                   //媒体库列表
         {
             imgLocation:"static/imgs/cover1.jpg",
             videoName:"晚会频道",
@@ -60,6 +60,9 @@ const state={
             playNum:'22',
             viewNum:'11'
            }
+    ],
+    liveUser:[                   //直播统计信息的用户列表
+        
     ]
 }
 

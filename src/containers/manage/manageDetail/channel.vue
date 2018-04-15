@@ -43,7 +43,7 @@ import channelHandle from 'store/Channel.js'
         )
       },
       created(){
-         var user=sessionStorage.getItem('userName');
+         var user=sessionStorage.getItem('userId');
          var that=this;
          channelHandle.getChannelList({"userId":user}).then(function(res){
               if(res.data.retureValue==0){

@@ -60,25 +60,7 @@ import info from 'store/liveInfo.js'
          
          var that=this;
          var userId=sessionStorage.getItem('userName');
-         info.liveUserData({'liveId':'123'}).then(function(res){
-              if(res.data.retureValue==0){
-                console.log(res.data.retureData);
-                that.$store.state.allMedia=[];
-                for(let i=0;i<res.data.retureData.length;i++){
-                   let temp=res.data.retureData[i];
-                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
-                   if(!temp.playNum) temp.playNum=100;
-                   if(!temp.viewNum) temp.viewNum=50;
-                   that.$store.state.allMedia.push(temp);
-                }
-              }
-              else{
-                 alert("加载失败");
-              }
-         }).catch(function(err){
-             console.log(err);
-             alert("加载失败.");
-         });
+     
 
 
            info.liveData({"liveId":"a27680916b2c493dacf894c7b42bcef"}).then(function(res){

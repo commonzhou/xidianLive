@@ -125,6 +125,8 @@
 
 <script>
 import Shelf from 'components/common/shelf';
+import info from 'store/liveInfo.js';
+import { mapMutations, mapState } from 'vuex';
   export default {
     name: 'form',
     components: {
@@ -152,6 +154,31 @@ import Shelf from 'components/common/shelf';
         Images
       }
     },
+    created(){
+       var that=this;
+         var userId=sessionStorage.getItem('userName');
+          info.liveUserData({'liveId':'123'}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                that.$store.state.liveUser=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   that.$store.state.liveUser.push(temp);
+                }
+              }
+              else{
+                 alert("加载失败");
+              }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
+    },
+     computed:{
+        ...mapState(
+          ['liveUser']
+        )
+      },
     methods: {
       showFeedbackDetail (item) {
         this.chosenFeedback = item

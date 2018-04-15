@@ -23,7 +23,7 @@ export default {
           }
           else{
               channelHandle.createNewChannel({
-                "userId":this.person,
+                "userId":sessionStorage.getItem('userId'),
                 "channelName":this.name}).then(function(res){
 
                 if(res.data.retureValue==0){
