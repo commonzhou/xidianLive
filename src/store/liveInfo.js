@@ -36,6 +36,9 @@ class liveInfo extends BaseModule{
   dianboData(data){
     return this.post('/record/video',data)
   }
+  liveCountInfo(data){
+    return this.post('/statistic/getChannelAndLive',data)
+  }
 }
 
 export default new liveInfo();

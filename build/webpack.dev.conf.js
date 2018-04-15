@@ -11,7 +11,7 @@ const portfinder = require('portfinder')
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
-const context=[`/user/*`,`/channel/*`,`/live/*`,'/mobile/*',`/0.1/*`]
+const context=[`/user/*`,`/channel/*`,`/live/*`,'/mobile/*',`/0.1/*`,`/record/*`,`/statistic/*`]
 
 
 const devWebpackConfig = merge(baseWebpackConfig, {
