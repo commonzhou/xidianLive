@@ -6,3 +6,4 @@ after_success:
 before_install:
 - openssl aes-256-cbc -K $encrypted_0b8a1f1e2c63_key -iv $encrypted_0b8a1f1e2c63_iv
   -in xidianzhibo_id_rsa.enc -out ~/.ssh/xidianzhibo_id_rsa -d
+- chmod 600 ~/.ssh/xidianzhibo_id_rsa
