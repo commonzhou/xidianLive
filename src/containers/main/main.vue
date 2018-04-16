@@ -7,7 +7,7 @@
         <!-- <img   scr="~assets/imgs/fanshao/starry.jpg"  /> -->
           <span class="img a"></span>
           <!-- <img src="~assets/imgs/fanshao/starry.jpg" alt=""> -->
-          <span class="text b">西电直播<br/>助您仰望更远的星空</span>
+          <span class="text b">青葱校园直播<br/>助您仰望更远的星空</span>
         </div>
     </div>
 

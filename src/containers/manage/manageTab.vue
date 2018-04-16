@@ -3,7 +3,7 @@
     <div>
         <header class="h-box">
           <div class="h-logo">
-              <router-link tag='div' class="tab-item" to="/main" @click="changePage(2)" :class="{active:choosePage===2}"><img src="~assets/imgs/fanshao/user.png" alt="Logo"></router-link>
+              <router-link tag='div' class="tab-item" to="/main" @click="changePage(2)" :class="{active:choosePage===2}"><img src="~assets/imgs/fanshao/logo.png" alt="Logo"></router-link>
           </div>
           <div class="h-title">
             

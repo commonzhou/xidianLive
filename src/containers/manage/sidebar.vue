@@ -25,7 +25,7 @@
            return{
              manageOption: [{
                     name: '频道管理',
-                    list: ['分类管理', '新建频道'],
+                    list: ['全部频道', '频道装修'],
                     show: false,
                     path:['/channel'],
                     nickname:'channel'

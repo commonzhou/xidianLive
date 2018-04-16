@@ -17,10 +17,14 @@
              <div>活动介绍：{{liveInfo}}</div>
           </div>
             <div class="section">
-            <div>直播地址</div>
+            <div>直播流URL:</div>
             <div>{{videoUrl}}</div>
-            <div>分流地址</div>
-            <div>{{pushUrl}}}</div>
+            <div>直播流名称:</div>
+            <div>{{videoName}}}</div>
+             <div>推流URL:</div>
+            <div>{{videoUrl}}</div>
+            <div>推流名称:</div>
+            <div>{{pushName}}}</div>
             <div>
                <router-link  :to="{ path: 'viewMobile', query: { channelId: channelId}}" tag="div" class="mobile">前往手机端</router-link>
             </div>  
@@ -44,12 +48,14 @@ import liveHandler from 'store/liveInfo.js'
                 name:"",   //name刷新了就没有了，因此需要存储cookie和localStorage
                 videoPic:"",
                 videoUrl:"",
+                videoName:'',
                 liveTitle:'',
                 startTime:'',
                 endTime:'',
                 liveLocation:'',
                 liveInfo:'',
                 pushUrl:'',
+                pushName:'',
                 schduledList:'',
                 channelId:""
             }
@@ -60,9 +66,10 @@ import liveHandler from 'store/liveInfo.js'
     created(){
        this.fetchData();
        this.channelId=localStorage.getItem('channelId');
+       var userId=sessionStorage.getItem('userId');
        var that=this;
          liveHandler.getLiveInfo({
-                "userId":'457cfd7ddaef41969f7fa90b56d1a5a1',
+                "userId":userId,
                 "token":'',
                 "channelId":localStorage.getItem('channelId'),
                 "liveId":localStorage.getItem('liveId')
@@ -72,20 +79,27 @@ import liveHandler from 'store/liveInfo.js'
                  // alert('成功')
                     var videoInfo=res.data.retureData; 
                     that.videoPic=videoInfo.coverPicture;
-                    that.videoUrl=videoInfo.hlsPlayUrl;
+                   // that.videoUrl=videoInfo.hlsPlayUrl;
                     that.liveTitle=videoInfo.title;
-                    that.startTime=videoInfo.startTime;
-                    that.endTime=videoInfo.endTime;
+                    that.startTime=that.timestampToTime(videoInfo.startTime);
+                    that.endTime=that.timestampToTime(videoInfo.endTime);
                     that.liveLocation=videoInfo.location;
                     that.liveInfo=videoInfo.introduction;
-                    that.pushUrl=videoInfo.pushUrl;
+                   // that.pushUrl=videoInfo.pushUrl;
                     that.schduledList=videoInfo.schduledList;
 
-                    //console.log(videoInfo)
+                    var live1Index=videoInfo.hlsPlayUrl.indexOf('live/');
+                    that.videoUrl=videoInfo.hlsPlayUrl.substring(0,live1Index).concat('live/');
+                    that.videoName=videoInfo.hlsPlayUrl.substring(live1Index+5);
+
+                    var live2Index=videoInfo.pushUrl.indexOf('live/');
+                    that.pushUrl=videoInfo.pushUrl.substring(0,live2Index).concat('live/');
+                    that.pushName=videoInfo.pushUrl.substring(live2Index+5);
+                 
 
                       let player=new TcPlayer("movie",{
-                          "m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
-                          //"m3u8":that.videoUrl,
+                          //"m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
+                          "m3u8":that.videoUrl,
                           "autoplayer":true,
                           "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
                           "width":"100%"
@@ -127,7 +141,17 @@ import liveHandler from 'store/liveInfo.js'
               this.name=this.$route.params.nameId,
               localStorage.setItem('liveId',this.$route.params.liveId)
            } 
-        }
+        },
+        timestampToTime:function(timestamp) {   //时间戳换为时间
+          var date = new Date(timestamp);//时间戳为10位需*1000，时间戳为13位的话不需乘1000，我们是13位
+          var Y = date.getFullYear() + '-';
+          var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+          var D = date.getDate() + ' ';
+          var h = date.getHours() + ':';
+          var m = date.getMinutes() + ':';
+          var s = date.getSeconds();
+          return Y+M+D+h+m+s;
+      }
       }
     }
 </script>
@@ -161,7 +185,7 @@ import liveHandler from 'store/liveInfo.js'
           margin-top:7vh
       .aside
         flex:0 0 20%
-        width: 20%
+        width: 25%
         height: 100vh
         float: right
         margin-left:1%
