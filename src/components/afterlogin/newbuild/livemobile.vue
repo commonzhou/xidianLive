@@ -28,23 +28,40 @@
           <el-tab-pane label="直播信息" name="second" class="info">
             <div>主办方：不知是个啥</div>
             <div>频 道：频道不是贫道</div>
-            <div>直播主题：呵呵哈哈哈</div>
-            <div>开始时间：呵呵哈哈哈</div>
-            <div>结束时间：不知</div>
-            <div>活动地点：啦啦啦啦啦啦啦啦啦啦靠靠靠靠靠靠靠靠靠靠靠靠靠</div>
-            <div>活动介绍：呵呵哈哈哈</div>
+            <div>直播主题：{{liveDetails.type}}</div>
+            <div>开始时间：{{liveDetails.startTime}}</div>
+            <div>结束时间：{{liveDetails.endTime}}</div>
+            <div>活动地点：{{liveDetails.location}}</div>
+            <div>活动介绍：{{liveDetails.introduction}}</div>
           </el-tab-pane>
           <el-tab-pane label="历史直播" name="third">
-
+            <ul class="live-history" v-if="liveHistory">
+              <li
+                v-for="live in liveHistory"
+                :key="live.videoId"
+              >
+                <div class="live-cover-wrapper"
+                  :style="{backgroundImage: `url(${live.coverPictureId})`}"
+                ></div>
+                <div class="live-info-wrapper">
+                  <h3 class="live-title">{{live.title}}</h3>
+                  <time class="live-time">创建时间: {{live.createTime}}</time>
+                  <p class="live-view-count">历史观看人数: {{live.viewCount}}人</p>
+                </div>
+              </li>
+            </ul>
+            <p class="no-live-history" v-else>暂无历史直播</p>
           </el-tab-pane>
         </el-tabs>
       </el-main>
-      <el-footer class="foot" height="20%">
-        <el-input placeholder="请输入内容" size="large" class="input">
-          <template slot="append">发送</template>
+    </el-container>
+    <footer>
+      <div class="input-wrapper">
+        <el-input placeholder="请输入内容" size="large" class="input" v-model="chatMessage">
         </el-input>
-    </el-footer>
-  </el-container>
+      </div>
+      <a href="javascript:void(0);" class="send-message" @click="sendMessage">发 送</a>
+    </footer>
   </div>
 </template>
 
@@ -53,7 +70,7 @@
   import liveInfo from 'store/liveInfo.js'
   export default {
     props: {
-      channelId: {
+      channelIdFromParent: {
         type: String,
         default: ''
       }
@@ -61,11 +78,16 @@
     data() {
       return {
         activeName: 'first',
-        liveDetails: {}
+        liveDetails: {},
+        liveHistory: null,
+        chatMessage: ''
       }
     },
     created() {
+      this.channelId = this.$route.query.channelId || this.channelIdFromParent
       this.liveDetailMobile()
+      this.getLiveHistory()
+      this.getChatUserSig()
     },
     methods: {
       handleClick(tab, event) {
@@ -75,8 +97,7 @@
         window.location.href = "/#/livemobilelarge"
       },
       liveDetailMobile() {
-        let channelId = this.$route.query.channelId || this.channelId
-        liveInfo.getMobileLiveInfo(channelId).then(response => {
+        return liveInfo.getMobileLiveInfo(this.channelId).then(response => {
           console.log(response)
           if (response.data.retureValue === 0) {
             this.liveDetails = response.data.retureData
@@ -90,7 +111,8 @@
               this.liveDetails.durationHours = Math.floor(duration / 60)
               this.liveDetails.durationMinutes = Math.round(duration % 60)
             }
-            console.log(this.liveDetails.hlsPlayUrl)
+            this.liveDetails.endTime = end.toLocaleString()
+            this.liveDetails.startTime = (new Date(startTime)).toLocaleString()
             let player = new TcPlayer("movie", {
               "m3u8": this.liveDetails.hlsPlayUrl,
               "autoplayer": true,
@@ -98,11 +120,63 @@
               "width": "100%"
             })
           }
+          return response
         })
+      },
+      getLiveHistory () {
+        liveInfo.getLiveHistory(this.channelId).then(response => {
+          console.log(response)
+          if (response.data.retureValue === 0) {
+            this.liveHistory = response.data.retureData
+          }
+        })
+      },
+      getChatUserSig () {
+        liveInfo.getChatUserSig().then(response => {
+          console.log(response)
+          if (response.data.retureValue === 0) {
+            this.userSig = response.data.retureData.userSig
+            console.log(this.userSig)
+          }
+        })
+      },
+      sendMessage () {
+        console.log(this.chatMessage)
+        let {groupId} = this.liveDetails,
+            message = this.chatMessage
+        if (
+          message.trim()
+          && this.userSig
+          && groupId
+        ) {
+          liveInfo.sendChatMessage(this.userSig, {
+            GroupId: groupId,
+            Random: this.getRandomInt(),
+            MsgBody: [{
+              MsgType: 'TIMTextElem',
+              MsgContent: {
+                Text: message
+              }
+            }]
+          }).then(response => {
+            console.log(response)
+          })
+        } else {
+          console.log('缺少必要的参数')
+          console.log(this.chatMessage.trim())
+          console.log(this.userSig)
+          console.log(groupId)
+        }
+      },
+      getGroupMessage (userSig, groupId, messageNum) {
+        liveInfo.getHistoryChatMessage(userSig, {
+          GroupId: groupId,
+          ReqMsgNumber: messageNum
+        })
+      },
+      getRandomInt () {
+        return parseInt(Math.random().toString().slice(2, 10))
       }
-    },
-    mounted: function() {
-
     }
   }
 </script>
@@ -156,8 +230,51 @@
        text-align:left
        font-size:1.1rem
        line-height:1.8rem
-   .foot
-     background-color :#BDC0BA
-     .input
-       margin-top:0.9rem
+  footer
+    display: flex
+    height: 50px
+    background-color: #DCDFE6
+    padding-left: 10px
+    border-top: 1px solid white
+    .input-wrapper
+      flex-grow: 1
+      line-height: 50px
+    .send-message
+      display: block
+      width: 80px
+      line-height: 50px
+      text-decoration: none
+      color: white
+
+
+.live-history
+  padding-left: 0
+  list-style: none
+  margin: 0
+  li
+    padding: 10px 5px
+    .live-cover-wrapper
+      float: left
+      width: 100px
+      height: 100px
+      background-position: 50% 50%
+      background-size: cover
+      background-repeat: no-repeat
+      background-color: #ccc
+    .live-info-wrapper
+      margin-left: 105px
+      text-align: left
+      .live-title
+        line-height: 40px
+        font-size: 16px
+        margin: 0
+      .live-time, .live-view-count
+        line-height: 30px
+        font-size: 14px
+        margin: 0
+.no-live-history
+  margin: 40px 0
+  line-height: 40px
+  font-size: 14px
+  color: #999
 </style>
