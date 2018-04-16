@@ -8,8 +8,12 @@
         <div id="movie" style="width:100%;height:100%"></div>
       </el-main>
       <el-footer class="foot" height="25%">
-        <div id="title"><b>呵呵卫视2018跨年晚会直播</b></div>
-        <div class="subtitle"> xx人观看 &nbsp;&nbsp;&nbsp;&nbsp; 已观看1h24min</div>
+        <div id="title"><b>{{ liveDetails.title }}</b></div>
+        <div class="subtitle">
+          {{ liveDetails.viewCount }}人观看&nbsp;&nbsp;&nbsp;&nbsp;
+          <span v-if="liveDetails.ended">已结束</span>
+          <span v-else>已观看{{ liveDetails.durationHours }}h{{ liveDetails.durationMinutes }}min</span>
+        </div>
       </el-footer>
     </el-container>
     <el-container class="container2">
@@ -48,9 +52,16 @@
 <script type="text/ecmascript-6">
   import liveInfo from 'store/liveInfo.js'
   export default {
+    props: {
+      channelId: {
+        type: String,
+        default: ''
+      }
+    },
     data() {
       return {
-        activeName: 'first'
+        activeName: 'first',
+        liveDetails: {}
       }
     },
     created() {
@@ -63,30 +74,36 @@
       tolarge: function() {
         window.location.href = "/#/livemobilelarge"
       },
-      liveDetailMobile: function() {
-        liveInfo.getMobileLiveInfo('249df10bb4d344aea95d65845d684d5b').then(function(res) {
-          console.log(res)
-        }).catch(function(err) {
-          console.log(err)
-        })
-      },
-      getVedioInChannel: function() {
-        channel.getVedioInChannel({}).then(function(res) {
-          console.log(res)
-        }).catch(function(err) {
-          console.log(err)
+      liveDetailMobile() {
+        console.log(this.$route.query.channelId);
+        let channelId = this.$route.query.channelId || this.channelId
+        liveInfo.getMobileLiveInfo(channelId).then(response => {
+          console.log(response)
+          if (response.data.retureValue === 0) {
+            this.liveDetails = response.data.retureData
+            let {startTime, endTime} = this.liveDetails
+            let now = Date.now(),
+                end = new Date(endTime)
+            if (now > end) {
+              this.liveDetails.ended = true
+            } else {
+              let duration = (now - startTime) / (1000 * 60)
+              this.liveDetails.durationHours = Math.floor(duration / 60)
+              this.liveDetails.durationMinutes = Math.round(duration % 60)
+            }
+            console.log(this.liveDetails.hlsPlayUrl)
+            let player = new TcPlayer("movie", {
+              "m3u8": this.liveDetails.hlsPlayUrl,
+              "autoplayer": true,
+              "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
+              "width": "100%"
+            })
+          }
         })
       }
     },
     mounted: function() {
-      //this.$nextTick(function () {
-      // let player=new TcPlayer("movie",{
-      //   "m3u8":"http://v2v.cc/~j/theora_testsuite/320x240.ogg",
-      //   "autoplayer":true,
-      //   "coverpic":"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg",
-      //   "width":"100%"
-      // })
-      //})
+
     }
   }
 </script>

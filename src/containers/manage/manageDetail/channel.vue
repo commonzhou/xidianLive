@@ -4,12 +4,14 @@
        <section class="mt30 clearfix">
        <Shelf title="频道一览">
        </Shelf>
+         <Button text="新建频道"  @btnClick="newchannel" class="button"></Button>
+         <channelInput v-show="isShow" v-on:message="handleMessage" class="input"></channelInput>
       <div  class="homevideo" > 
-        <videoCard :msg="item" :key="i" v-for="(item,i) in videoList" @cardClick="toLive(item.videoName)"></videoCard>
+        <videoCard :msg="item" :key="i" v-for="(item,i) in videoList" @cardClick="toLive(item.channelName,item.channelId)"></videoCard>
        </div>
-        <channelInput v-show="isShow" v-on:message="handleMessage"></channelInput>
+       
      </section>
-     <Button text="新建频道"  @btnClick="newchannel"></Button>
+    
     
   </div>
 </template>
@@ -21,6 +23,7 @@ import Button from 'components/common/button'
 import channelInput from 'components/channelInput'
 import { mapMutations, mapState } from 'vuex'
 import { getStore } from 'store/storage'
+import channelHandle from 'store/Channel.js'
     export default{
       data(){
            return{
@@ -39,25 +42,49 @@ import { getStore } from 'store/storage'
           ['videoList']
         )
       },
+      created(){
+         var user=sessionStorage.getItem('userId');
+         var that=this;
+         channelHandle.getChannelList({"userId":user}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                that.$store.state.videoList=[];
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   that.$store.state.videoList.push(temp);
+                }
+              }
+              else{
+                 alert("加载失败");
+              }
+         }).catch(function(err){
+             console.log(err);
+             alert("加载失败.");
+         });
+      },
       methods:{
         ...mapMutations(['ADD_CHANNEL']),
         newchannel:function(){
            this.isShow = !this.isShow;
+
         },
         handleMessage:function(payload){
            this.messages=payload;
            this.isShow=false;
            this.ADD_CHANNEL({
              imgLocation:'static/imgs/cover2.jpg',
-             videoName:this.messages.name,
+             channelName:this.messages.name,
              playNum:0,
              viewNum:0
            });
         },
-        toLive:function(name){
+        toLive:function(name,id){
            //console.log(name)
            //this.$router.push('newLive');
-           this.$router.push({name:'newLive',params:{nameId:name}});
+           this.$router.push({name:'newLive',params:{nameId:name,channelId:id}});
         }
       }
     }
@@ -68,6 +95,8 @@ import { getStore } from 'store/storage'
     width:1220px;
     height:100%;
     margin:50px auto;
+    margin-left -18px
+    margin-top 10px
     border-radius: 8px;
     border: 1px solid #dcdcdc;
     border-color: rgba(0, 0, 0, .14);
@@ -77,6 +106,17 @@ import { getStore } from 'store/storage'
     display flex
     flex-wrap: wrap 
     >div
-      flex 1
-      width:25%
+      flex 0 0 25%
+  .button{
+    position:absolute;
+    top:145px;
+    left:78%;
+    z-index:20;
+  }
+  .input{
+    position absolute;
+    left:50%;
+    top:55%;
+    transform: translate(-50%,-50%);
+  }
 </style>

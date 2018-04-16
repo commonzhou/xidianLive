@@ -39,11 +39,11 @@ export default{
   },
 
   //新建频道使用
-  [ADD_CHANNEL] (state,{imgLocation,videoName,playNum,viewNum}){
+  [ADD_CHANNEL] (state,{imgLocation,channelName,playNum,viewNum}){
      let videoList=state.videoList;
      let item={
        imgLocation,
-       videoName,
+       channelName,
        playNum,
        viewNum
      }
@@ -55,11 +55,11 @@ export default{
   },
 
   //新建直播使用
-  [ADD_LIVE] (state,{imgLocation,videoName,playNum,viewNum}){
+  [ADD_LIVE] (state,{imgLocation,channelName,playNum,viewNum}){
      let liveList=state.liveList;
      let item={
       imgLocation,
-      videoName,
+      channelName,
       playNum,
       viewNum
     }

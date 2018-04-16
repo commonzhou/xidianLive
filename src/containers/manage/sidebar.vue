@@ -7,7 +7,7 @@
            <transition name="slider">
             <ul v-show="item.show">
                 <li v-for="(a,index) in item.list" :key="index" @click.stop>
-                  <router-link :to="{path:item.path}">
+                  <router-link :to="{path:item.path[index]}">
                       <a href="javascript:void(0)">{{a}}</a>
                   </router-link>
                 </li>
@@ -24,30 +24,47 @@
       data(){
            return{
              manageOption: [{
-                    name: '管理员管理',
-                    list: ['角色管理', '权限管理'],
-                    show: false,
-                    path:'/admin'
-                }, {
                     name: '频道管理',
-                    list: ['分类管理', '新建频道'],
+                    list: ['全部频道', '频道装修'],
                     show: false,
-                    path:'/channel'
+                    path:['/channel'],
+                    nickname:'channel'
+                },{
+                    name: '账户管理',
+                    list: ['个人中心', '认证中心','子账户管理'],
+                    show: false,
+                    path:['/admin'],
+                    nickname:'admin'
                 }, {
-                    name: '流量监控',
-                    list: ['观看人数', '点赞热度','弹幕数目'],
+                    name: '统计信息',
+                    list: ['直播统计', '直播表单','点播统计'],
                     show: false,
-                    path:'/count'
+                    path: ['/count','/form','/dianbo'],
+                    nickname:'count'
                 }, {
-                    name: '系统设置',
-                    list: ['基本设置'],
+                    name: '授权观看',
+                    list: ['用户组观看', '付费观看','授权码观看'],
                     show: false,
-                    path:'/system'
+                    path:['/auth'],
+                    nickname:'auth'
+                }, {
+                    name:'媒体中心',
+                    list:['全部视频'],
+                    show:false,
+                    path:['/mediaManage'],
+                    nickname:'mediaManage'
+                },{
+                    name: '订单管理',
+                    list: ['套餐购买','订单记录','账户余额'],
+                    show: false,
+                    path:['/purchase'],
+                    nickname:'purchase'
                 }, {
                     name: '使用说明',
                     list: ['操作说明'],
                     show: false,
-                    path:'/document'
+                    path:['/document'],
+                    nickname:'document'
                 }]   
            }
        },
@@ -107,7 +124,7 @@ a{
     text-decoration: none;
     display: block;
     padding: 18px 0 18px 0;
-    font-size: 16px;
+    font-size: 18px;
     outline: 0;
     -webkit-transition: all 200ms ease-in;
     -moz-transition: all 200ms ease-in;

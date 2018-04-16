@@ -5,7 +5,7 @@ export const setStore=(name,content)=>{
   if(typeof content !== 'string'){
       content = JSON.stringify(content)
   }
-  window.localStorage.setItem(name,content)
+  window.sessionStorage.setItem(name,content)
 }
 
 export const getStore = name=>{

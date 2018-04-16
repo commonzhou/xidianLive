@@ -3,16 +3,17 @@
     <div>
         <header class="h-box">
           <div class="h-logo">
-              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">学术直播</router-link>
+              <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">青葱直播</router-link>
           </div>
           <div class="h-sub">
-             <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link>
-             <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(2)" :class="{active:choosePage===2}">视频中心</router-link>
-             <router-link tag='div' class="tab-item" to="/manage" @click="changePage(3)" :class="{active:choosePage===3}">后台管理</router-link>
+             <!-- <router-link tag='div' class="tab-item" to="/displayvideo" @click="changePage(2)" :class="{active:choosePage===2}">视频中心</router-link> 
+            
+            <router-link tag='div' class="tab-item" to="/main" @click="changePage(1)" :class="{active:choosePage===1}">首页</router-link>  -->
           </div>
           <div class="h-aside">
+             <router-link tag='div' class="tab-item control" to="/manage" @click="changePage(3)" :class="{active:choosePage===3}">控制台</router-link>
              <router-link tag='div' class="tab-item person" to="/login" @click="changePage(4)" :class="{active:choosePage===4}"><img src="~assets/imgs/fanshao/user.png" alt="登陆"></router-link>
-             <router-link tag='div' class="tab-item buy" to="/purchase" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/buy.png" alt="购买"></router-link> 
+             <router-link tag='div' class="tab-item buy" to="/message" @click="changePage(5)" :class="{active:choosePage===5}"><img src="~assets/imgs/fanshao/message.png" alt="购买"></router-link> 
           </div>
         </header>
     </div>
@@ -45,7 +46,7 @@
             else if(this.$route.path === '/login'){
                this.changePage(4)
             }
-            else if(this.$route.path === '/purchase'){
+            else if(this.$route.path === '/message'){
                this.changePage(5)
             }
             else{
@@ -75,43 +76,39 @@
     color:white
   }
    .h-logo
-      flex 1
+      flex 0 0 30%
       height: 100%
       text-align:center  
       font-size:1.8rem
       div 
-        margin-top:2vh
+        margin-top:1.2vh
         cursor:pointer
         &:hover
           color:#2EA9DF
    .h-sub
-      flex:1
+      flex:0 0 40%
       display flex
       justify-content center
       align-content center
       text-align:center  
       font-size:1.2rem
-      div
-        margin-top:2vh
-        margin-right:5vw
-        cursor:pointer
-        &:hover
-          color:#2EA9DF
    .h-aside
-      flex 1
+      flex 0 0 30%
       display flex
-      justify-content center 
+      justify-content flex-end 
       align-content center 
       text-align center
-      font-size:1.2em
+      font-size:1.3em
       div
-        margin-top:3vh
-        margin-right:5vw
+        margin-top:3.5vh
+        margin-right:3vw
         cursor:pointer
         &:hover
           color:#2EA9DF
         img 
-          height:40px;
+          height:35px;
+      div.control
+          margin-top:4vh;
     // .active{
     //   font-weight:bold
     //   color:#2EA9DF

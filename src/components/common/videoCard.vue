@@ -8,7 +8,7 @@
         <img :src="imgLocation" :alt="videoName">
 
       </div>
-      <h3 class="title">{{msg.videoName}}</h3>
+      <h3 class="title">{{msg.channelName}}</h3>
       <!-- <h3 class="sub-title ellipsis">{{msg.sub_title}}</h3> -->
       <div class="good-price">
         <div class="info">

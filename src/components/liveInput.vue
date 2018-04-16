@@ -4,7 +4,8 @@
      <label for="text">直播名称</label><input type="text" id="text" v-model="name">
      <label for="place">直播地点</label><input type="text" id="place" v-model="location">
      <label for="date">直播日期</label><input type="date" id="date" v-model="date">
-     <label for="datetime">开始、结束时间</label><input type="text" id="datetime" v-model="time">
+     <label for="datetime">开始时间</label><input type="text" id="datetime" v-model="time">
+      <label for="timeend">结束时间</label><input type="text" id="timeend" v-model="timeEnd">
      <label for="content">直播简介</label><input type="text" id="content" v-model="info">
      <button @click="submit">提交</button>
   </div>
@@ -12,6 +13,8 @@
  
 </template>
 <script>
+import liveHandler from 'store/liveinfo.js'
+var user=localStorage.getItem('userName');
 export default {
   data(){
     return{
@@ -19,22 +22,59 @@ export default {
       location:'',
       date:'',
       time:'',
-      info:''
+      timeEnd:'',
+      info:'',
+      channel:''
+    }
+  },
+  watch:{
+    channelId:function(val){
+        this.channel=val;
     }
   },
   methods:{
+
     submit:function(){
-      if((this.name=="") || (this.info=="")||(this.location=="")||(this.time=="")||(this.date=='')){
+      if((this.name=="") || (this.info=="")||(this.location=="")||(this.time=="")||(this.date=='')||(this.timeEnd=="")){
         //不知为何，！this.name就不行，这是为啥，可能'' 不是false
         alert("填写完信息再提交！");
       }
       else{
-        this.$emit("newlive",{name:this.name,location:this.location,date:this.date,time:this.time,info:this.info});
-        this.name='';
-        this.location='';
-        this.date='';
-        this.time='';
-        this.info='';
+         var that=this;
+         var userId=sessionStorage.getItem('userId');
+         liveHandler.createNewLive({
+                "userId":userId,
+                "token":'',
+                "channelId":localStorage.getItem('channelId'),
+                "liveName":this.name,
+                "startTime":this.time,
+                "endTime":this.timeEnd,
+                "location":this.location
+                }).then(function(res){
+
+                if(res.data.retureValue==0){
+                  alert('新建成功')
+                    that.$emit("newlive",{name:that.name,location:that.location,date:that.date,time:that.time,endtime:that.timeEnd,info:that.info});
+                    that.name='';
+                    that.location='';
+                    that.date='';
+                    that.time='';
+                    that.timeEnd='';
+                    that.info='';
+                }
+                else{
+                  alert("创建失败")
+                }
+                }).catch(
+                  function(err){
+                    console.log(err);
+                    alert("创建失败.");
+                  }
+                );
+
+
+      
+       
       }
     }
   }

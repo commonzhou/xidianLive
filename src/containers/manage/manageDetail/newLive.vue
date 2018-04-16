@@ -3,12 +3,14 @@
      <section class="mt30 clearfix">
        <Shelf :title="title">
        </Shelf>
+          <Button text="新建直播"  @btnClick="newlive" class="button"></Button>
+           <liveInput v-show="isShow" v-on:newlive="handlelive" class="input"></liveInput>
       <div  class="homevideo" > 
-        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.videoName)"></videoCard>
+        <videoCard :msg="item" :key="i" v-for="(item,i) in liveList" @cardClick="toLive(item.channelName,item.liveId)"></videoCard>
        </div>
-        <liveInput v-show="isShow" v-on:newlive="handlelive"></liveInput>
+       
      </section>
-     <Button text="新建直播"  @btnClick="newlive"></Button>
+  
     
   </div>
 </template>
@@ -20,12 +22,14 @@ import Button from 'components/common/button'
 import liveInput from 'components/liveInput'
 import { mapMutations, mapState } from 'vuex'
 import { getStore } from 'store/storage'
+import liveHandler from 'store/liveinfo.js'
     export default{
       data(){
            return{
              isShow:false,   //决定新建频道框是否弹出
              messages:'',     //存储新建框这个子组件传上来的信息
              title:''
+             //channelId:''
            }
        },
       components:{
@@ -35,7 +39,33 @@ import { getStore } from 'store/storage'
         liveInput 
       },
        created(){
-       this.fetchData()
+         console.log('hahahah')
+       this.fetchData();
+       this.title=localStorage.getItem('liveTitle');
+       var that=this;
+       var channel=localStorage.getItem('channelId');
+        that.$store.state.liveList=[];
+       liveHandler.getLiveChannel({"channelId":channel}).then(function(res){
+              if(res.data.retureValue==0){
+                console.log(res.data.retureData);
+                
+                for(let i=0;i<res.data.retureData.length;i++){
+                   let temp=res.data.retureData[i];
+                   if(!temp.imgLocation) temp.imgLocation='static/imgs/cover2.jpg';
+                   if(!temp.playNum) temp.playNum=100;
+                   if(!temp.viewNum) temp.viewNum=50;
+                   if(!temp.channelName) temp.channelName=temp.liveName;
+                   that.$store.state.liveList.push(temp);
+                }
+               
+              }
+              // else{
+              //    alert("加载失败");
+              // }
+         }).catch(function(err){
+             console.log(err);
+            // alert("加载失败.");
+         });
        },
       watch:{
       '$route':'fetchData'
@@ -55,18 +85,23 @@ import { getStore } from 'store/storage'
            this.isShow=false;
            this.ADD_LIVE({
              imgLocation:'static/imgs/cover2.jpg',
-             videoName:this.messages.name,
+             channelName:this.messages.name,
              playNum:0,
              viewNum:0
            });
         },
         fetchData:function(){
             console.log(this.$route)
-            this.title=this.$route.params.nameId
+            if(this.$route.params.nameId){                                       //处理f5以后，title为空的问题
+               localStorage.setItem('liveTitle',this.$route.params.nameId);
+            }
+            if(this.$route.params.channelId){                                   //处理f5之后，channelId为空的问题
+            localStorage.setItem('channelId',this.$route.params.channelId);
+            }
         },
-        toLive:function(name){
-           console.log(name)
-           this.$router.push({name:'viewVideo',params:{nameId:name}});
+        toLive:function(name,liveId){
+           console.log(name,liveId)
+           this.$router.push({name:'viewVideo',params:{nameId:name,liveId:liveId}});
         }
       }
     }
@@ -86,6 +121,18 @@ import { getStore } from 'store/storage'
     display flex
     flex-wrap: wrap 
     >div
-      flex 1
-      width:25%
+      flex 0 0 25%                   //这样的好处是，就算一行只有一个div，也会只分布25%，不会自动扩展到整个那么长
+  .button{
+    position:absolute;
+    top:185px;
+    left:80%;
+    z-index:20;
+  }
+   .input{
+    position absolute;
+    left:50%;
+    top:55%;
+    transform: translate(-50%,-50%);
+    z-index:10;
+  }
 </style>

@@ -3,23 +3,29 @@ import Router from 'vue-router'
 import Index from 'containers/index'
 import main from 'containers/main/main'
 import scene from 'components/scene/scene'
-import purchase from 'components/purchase/purchase'
+import purchase from 'containers/manage/manageDetail/purchase'
 import livecase from 'components/livecase/livecase'
-import displayvideo from 'components/videoDisplay/videoDisplay'
+import displayvideo from 'containers/videoDisplay/videoDisplay'
 import register from 'containers/register/register'
 import login from 'containers/login/login'
+import message from 'containers/message/message'
 import manage from 'containers/manage/manage'                    //通往管理页面
 import document from 'containers/manage/manageDetail/document'   //管理界面文档介绍
-import admin from 'containers/manage/manageDetail/admin'
+import admin from 'containers/manage/admin/admin'                // 个人中心
 import channel from 'containers/manage/manageDetail/channel'     //管理频道，可新建频道
 import newLive from 'containers/manage/manageDetail/newLive'     //管理直播，可新建直播
-import system from 'containers/manage/manageDetail/system'
-import count from 'containers/manage/manageDetail/count'
+import auth from 'containers/manage/auth/auth'                   //用户组管理授权
+import authUser from 'containers/manage/auth/authUser'           //用户组内部用户管理
+import count from 'containers/manage/count/count'                //直播数据页面
+import dianbo from 'containers/manage/count/dianbo'              //点播数据页面
+import form from 'containers/manage/count/form'                  //观看直播的用户表单统计
+import mediaManage from 'containers/manage/media/media'          //管理后台界面的媒体库
 import error from 'containers/error'                             //404页面
 import viewVideo from 'components/common/viewVideo'              //视频pc端播放
 import viewMobile from 'components/common/viewMobile'            //视频手机端播放
 
-import newmain from 'components/newmain/newmain'
+
+
 import newbuild from 'components/afterlogin/newbuild/newbuild'
 import media from 'components/afterlogin/media/media'
 
@@ -29,8 +35,8 @@ import livepc from 'components/afterlogin/newbuild/livepc'
 import livemobile from 'components/afterlogin/newbuild/livemobile'
 import livemobilelarge from 'components/afterlogin/newbuild/livemobilelarge'
 
-import subvideo from 'components/videoDisplay/subvideoDisplay'
-import playvideo from 'components/videoDisplay/playVideo'
+import subvideo from 'containers/videoDisplay/subvideoDisplay'
+import playvideo from 'containers/videoDisplay/playVideo'
 
 Vue.use(Router)
 
@@ -49,22 +55,28 @@ export default new Router({
       redirect: '/main',
       children: [
         {path: 'main', component: main},
-        {path: 'purchase', component: purchase},
         {path: 'register', name: 'register', component: register},
-        {path: 'login', name:"login",component:login}
+        {path: 'login', name:"login",component:login},
+        {path: 'message',name:'message',component:message}
       ]
     },
     {
        path:'/manage',
        name:'manage',
        component:manage,
+       redirect:'/channel',
        children:[
          {path:'/document',name:'document',component:document},
-         {path:'/admin',name:'admin',component:error},
+         {path:'/admin',name:'admin',component:admin},
          {path:'/channel',name:'channel',component:channel},
-         {path:'/system',name:'system',component:error},
-         {path:'/count',name:'count',component:error},
-         {path:'/newLive',name:'newLive',component:newLive}
+         {path:'/auth',name:'auth',component:auth},
+         {path:'/authUser',name:'authUser',component:authUser},
+         {path:'/count',name:'count',component:count},
+         {path:'/dianbo',name:'dianbo',component:dianbo},
+         {path:'/form',name:'form',component:form},
+         {path:'/newLive',name:'newLive',component:newLive},
+         {path:'/purchase',name:'purchase',component:purchase},
+         {path:'/mediaManage',name:'mediaManage',component:mediaManage}
        ]
     },
     {
@@ -91,11 +103,6 @@ export default new Router({
       path:'/personal',
       name:'personal',
       component:personal
-    },
-    {
-      path:'/newmain',
-      name:'newmain',
-      component:newmain
     },
     {
       path:'/channel1',

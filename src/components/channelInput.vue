@@ -7,6 +7,7 @@
 	</div>
 </template> 
 <script>
+import channelHandle from 'store/Channel.js'
 export default {
    data(){
     return{
@@ -16,13 +17,34 @@ export default {
    },
    methods:{
        submit:function(){
+          var that=this;
           if( (this.name=="") || (this.person=="")){
               alert('填写完信息再提交！')
           }
           else{
-              this.$emit("message",{name:this.name,person:this.person});  
-              this.name="";               //向父组件传递参数后，清空数据框
-              this.person="";
+              channelHandle.createNewChannel({
+                "userId":sessionStorage.getItem('userId'),
+                "channelName":this.name}).then(function(res){
+
+                if(res.data.retureValue==0){
+                  alert('新建成功')
+                    that.$emit("message",{name:that.name,person:that.person});
+                    that.name="";               //向父组件传递参数后，清空数据框
+                    that.person="";
+                }
+                else{
+                  alert("创建失败")
+                }
+                }).catch(
+                  function(err){
+                    console.log(err);
+                    alert("创建失败.");
+                  }
+                );
+              
+              //this.$emit("message",{name:this.name,person:this.person});  
+              //之前清空数据框放在这里，结果导致新建的频道拿不到name和person，应该是因为ajax请求是异步的，因此
+              //先执行到了这里
           }
        }
    }

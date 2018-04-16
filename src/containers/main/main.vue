@@ -3,11 +3,11 @@
        <div class="banner">
          <div class="bg" ref="bg" @mouseover="bgOver($refs.bg)"
             @mousemove="bgMove($refs.bg,$event)"
-            @mouseout="bgOut($refs.bg)">
+            @mouseout="bgOut($refs.bg)" style="background:url('static/imgs/starry.jpg')">
         <!-- <img   scr="~assets/imgs/fanshao/starry.jpg"  /> -->
           <span class="img a"></span>
           <!-- <img src="~assets/imgs/fanshao/starry.jpg" alt=""> -->
-          <span class="text b">西电直播<br/>助您仰望更远的星空</span>
+          <span class="text b">青葱校园直播<br/>助您仰望更远的星空</span>
         </div>
     </div>
 
@@ -26,6 +26,8 @@
         <videoCard :msg="item" :key="i" v-for="(item,i) in homevideo"></videoCard>
        </div>
     </section>
+
+    <goTop></goTop>
   </div>
 </template>
 
@@ -33,6 +35,7 @@
 import Shelf from 'components/common/shelf'
 import disCard from 'components/common/displayCard'
 import videoCard from 'components/common/videoCard'
+import goTop from 'components/common/goTop'
  export default{
       data(){
           return{
@@ -107,7 +110,8 @@ import videoCard from 'components/common/videoCard'
       components:{
          Shelf,
          disCard,
-         videoCard
+         videoCard,
+         goTop
       }
     }
 </script>
@@ -135,7 +139,7 @@ import videoCard from 'components/common/videoCard'
     height: 500px;
     margin: 20px auto;
     margin-top:40px;
-    background: url("~assets/imgs/fanshao/starry.jpg") center no-repeat;
+    background: center no-repeat;
     background-size: 100% 100%;
     border-radius: 10px;
     transform-style: preserve-3d;

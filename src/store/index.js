@@ -7,51 +7,62 @@ Vue.use(Vuex);
 const state={
     login:false,  //is login
     userInfo:null,
-    videoList:[
-           {
-            imgLocation:"static/imgs/cover1.jpg",
-            videoName:"晚会频道",
-            playNum:'22',
-            viewNum:'11'
-           },
-            {
-            imgLocation:"static/imgs/cover2.jpg",
-            videoName:"学术频道",
-            playNum:'2200',
-            viewNum:'117'
-            },
-            {
-                imgLocation:"static/imgs/cover1.jpg",
-            videoName:"晚会频道",
-            playNum:'22',
-            viewNum:'11'
-           },
-            {
-            imgLocation:"static/imgs/cover2.jpg",
-            videoName:"学术频道",
-            playNum:'2200',
-            viewNum:'117'
-            },
-            {
-                imgLocation:"static/imgs/cover2.jpg",
-                videoName:"学术频道",
-                playNum:'2200',
-                viewNum:'117'
-            }
+    videoList:[                   //直播列表
+        //    {
+        //     imgLocation:"static/imgs/cover1.jpg",
+        //     videoName:"晚会频道",
+        //     playNum:'22',
+        //     viewNum:'11'
+        //    },
+        //     {
+        //     imgLocation:"static/imgs/cover2.jpg",
+        //     videoName:"学术频道",
+        //     playNum:'2200',
+        //     viewNum:'117'
+        //     },
+        //     {
+        //     imgLocation:"static/imgs/cover1.jpg",
+        //     videoName:"晚会频道",
+        //     playNum:'22',
+        //     viewNum:'11'
+        //    }
     ],
-    liveList:[
+    liveList:[                        //频道列表
+        // {
+        //     imgLocation:"static/imgs/cover1.jpg",
+        //     videoName:"晚会直播",
+        //     playNum:'22',
+        //     viewNum:'11'
+        //    },
+        //     {
+        //     imgLocation:"static/imgs/cover2.jpg",
+        //     videoName:"学术直播",
+        //     playNum:'2200',
+        //     viewNum:'117'
+        //     }
+    ],
+    allMedia:[                   //媒体库列表
         {
             imgLocation:"static/imgs/cover1.jpg",
-            videoName:"晚会直播",
+            videoName:"晚会频道",
             playNum:'22',
             viewNum:'11'
            },
             {
             imgLocation:"static/imgs/cover2.jpg",
-            videoName:"学术直播",
+            videoName:"学术频道",
             playNum:'2200',
             viewNum:'117'
-            }
+            },
+            {
+            imgLocation:"static/imgs/cover1.jpg",
+            videoName:"晚会频道",
+            playNum:'22',
+            viewNum:'11'
+           }
+    ],
+    liveUser:[                   //直播统计信息的用户列表
+        
     ]
 }
 

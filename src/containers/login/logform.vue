@@ -6,7 +6,11 @@
     <el-input  v-model="ruleForm2.name" auto-complete="off" placeholder="手机号"></el-input>
   </el-form-item>
   <el-form-item  prop="pass" class="item">
-    <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"></el-input>
+    <el-input  v-model="ruleForm2.pass" auto-complete="off" placeholder="密码"  type="password"></el-input>
+  </el-form-item>
+  <el-form-item  prop="graph" class="item">
+    <el-input v-model="ruleForm2.graph" placeholder="请输入数字验证码"  class=" item2"></el-input>
+    <input type="button" id="code" @click="createCode"  class="verification" v-model="checkCode"/>
   </el-form-item>
   <div id="check">
       <el-checkbox v-model="checked" class="check" >自动登陆 </el-checkbox>
@@ -28,13 +32,24 @@
 // axios.defaults.baseURL='http://118.89.112.125/xidianlive';
 import LogReg from 'store/LogReg.js'
 import {setStore, getStore, removeStore} from 'store/storage.js'
+
   export default {
     data() {
+       var validateCode = (rule, value, callback) => {
+        if (value.toLocaleUpperCase()!=this.checkCode) {
+          callback(new Error('请输入验证码'));
+        } 
+        else {
+          callback();
+        }
+      };
       return {
         checked:'',
+        checkCode:'',    //用于验证码
         ruleForm2: {
           name: '',
           pass: '',
+          graph:''
         },
         rules2: {
           name: [
@@ -44,14 +59,32 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
           pass: [
              { required: true, message: '请输入密码', trigger: 'blur' },
              { min: 6, max: 12,message: '请输入6-12位密码', trigger: 'blur' }
+          ],
+          graph: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+            { message: '辣鸡，连个验证码都搞不定', trigger: 'blur',validator: validateCode }
           ]
         }
       };
     },
     components:{
-      //actionStore
+    },
+    mounted(){
+      this.createCode()               // 绑定的时候，就手动触发一次，防止进去还需要用户点击生成验证码，low。啊，防止csrf的第一道防线啊
     },
     methods: {
+      createCode(){
+  var code = ""; 
+  var codeLength = 4;//验证码的长度 
+  var random = new Array(0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R', 
+     'S','T','U','V','W','X','Y','Z');//随机数 
+  for(var i = 0; i < codeLength; i++) {
+   //循环操作 
+   var index = Math.floor(Math.random()*36);//取得随机数的索引（0~35） 
+   code += random[index];//根据索引取得随机数加到code上 
+  } 
+  this.checkCode = code;//把code值赋给验证码 
+},
       submitForm(formName) {
         var that=this;
         this.$refs[formName].validate((valid) => {
@@ -63,14 +96,17 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
                 function(res){
                 console.log(res);
                 if(res.data.retureValue==0){
-                  setStore("userName",that.ruleForm2.name);
-                  setStore("password",that.ruleForm2.pass);
+                  //setStore("userName",that.ruleForm2.name);
+                  //setStore("password",that.ruleForm2.pass);
+                  sessionStorage.setItem('userName',that.ruleForm2.name);
+                  sessionStorage.setItem('password',that.ruleForm2.pass);
+                  sessionStorage.setItem('userId',res.data.retureData.userId);
                   that.$store.state.login=true;
                   that.$router.push('/main');
                   // window.location.href="/#/newmain";
                 }
                 else{
-                  alert("sb，用户名或者密码不对啊")
+                  alert("用户名或者密码不对啊")
                 }
                 }
              ).catch(function(err){
@@ -104,7 +140,7 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
    .form
      border:2px solid #00896C
      width:40%
-     height:22rem
+     height:24rem
      margin:2rem auto
      margin-bottom:8rem
      .item
@@ -121,6 +157,9 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
        color:#91989F
      :-ms-input-placeholder
        color:#91989F
+     .item2
+       width:80%
+       float left
      .buttontotal
       margin:0 auto
       margin-top:2rem
@@ -133,7 +172,7 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
      #check 
         width:80%
         font-size:0.9rem
-        margin:1.6rem 0rem 2rem 9.5rem
+        margin:2rem 0rem 2rem 9.5rem
         margin-left:4vw
         .check
           margin-right 8vw
@@ -142,4 +181,11 @@ import {setStore, getStore, removeStore} from 'store/storage.js'
     margin-top:9rem
     color:#00896C
     font-size:2rem
+
+    .verification{
+    vertical-align: middle;
+    
+    overflow hidden;
+   }
+ 
 </style>
