@@ -76,11 +76,11 @@ import info from 'store/liveInfo.js'
                 }
               }
               else{
-                 alert("加载失败");
+                 //alert("加载失败");
               }
          }).catch(function(err){
              console.log(err);
-             alert("加载失败.");
+            // alert("加载失败.");
          });
 
          
@@ -97,11 +97,11 @@ import info from 'store/liveInfo.js'
                 }
               }
               else{
-                 alert("加载失败");
+                 //alert("加载失败");
               }
          }).catch(function(err){
              console.log(err);
-             alert("加载失败.");
+            // alert("加载失败.");
          });
 
       },

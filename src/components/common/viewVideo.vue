@@ -1,7 +1,7 @@
 <template>
   <div>
       <Tab></Tab>
-      <div class="header">{{name}}</div>
+      <div class="header">{{liveTitle}}</div>
       <div class="container">
            <div class="main">
            <div id="window">
@@ -20,11 +20,11 @@
             <div>直播流URL:</div>
             <div>{{videoUrl}}</div>
             <div>直播流名称:</div>
-            <div>{{videoName}}}</div>
+            <div>{{videoName}}</div>
              <div>推流URL:</div>
             <div>{{videoUrl}}</div>
             <div>推流名称:</div>
-            <div>{{pushName}}}</div>
+            <div>{{pushName}}</div>
             <div>
                <router-link  :to="{ path: 'viewMobile', query: { channelId: channelId}}" tag="div" class="mobile">前往手机端</router-link>
             </div>  
@@ -57,7 +57,9 @@ import liveHandler from 'store/liveInfo.js'
                 pushUrl:'',
                 pushName:'',
                 schduledList:'',
-                channelId:""
+                channelId:"",
+                type:'',
+                playUrl:''
             }
         },
       components:{                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
@@ -67,7 +69,50 @@ import liveHandler from 'store/liveInfo.js'
        this.fetchData();
        this.channelId=localStorage.getItem('channelId');
        var userId=sessionStorage.getItem('userId');
+       this.type=localStorage.getItem('type');
        var that=this;
+       console.log(this.type)
+       //  点播，历史视频的获取
+       if(this.type==1){              //type为1说明是点播的历史视频，0代表直播
+        liveHandler.getDianboInfo(localStorage.getItem('liveId')).then(function(res){
+                //if(res.data.retureValue==0){
+          if(res.data.retureValue==0){
+                 // alert('成功')
+                    var videoInfo=res.data.retureData; 
+                    that.videoPic=videoInfo.coverPicture;
+                   // that.videoUrl=videoInfo.hlsPlayUrl;
+                    that.liveTitle=videoInfo.videoName;
+                    that.startTime=that.timestampToTime(videoInfo.startTime*1000);
+                    that.endTime=that.timestampToTime(videoInfo.endTime*1000);
+                    that.liveLocation=videoInfo.location;
+                    that.liveInfo=videoInfo.introduction;
+                   // that.pushUrl=videoInfo.pushUrl;
+                    that.schduledList=videoInfo.schduledList;
+                    
+                    that.playUrl=videoInfo.playUrl;                                                          
+                       
+                      let player=new TcPlayer("movie",{
+                          //"m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
+                          "m3u8": that.playUrl,
+                          "autoplayer":true,
+                          "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
+                          "width":"100%"
+                     })
+                }
+                else{
+                  //alert("失败")
+                  console.log("不知名错误");
+                }
+
+        }).catch(
+                  function(err){
+                    console.log(err);
+                  }
+                );
+       }
+
+       // 直播的视频获取和播放
+       else{
          liveHandler.getLiveInfo({
                 "userId":userId,
                 "token":'',
@@ -87,7 +132,7 @@ import liveHandler from 'store/liveInfo.js'
                     that.liveInfo=videoInfo.introduction;
                    // that.pushUrl=videoInfo.pushUrl;
                     that.schduledList=videoInfo.schduledList;
-
+                    
                     var live1Index=videoInfo.hlsPlayUrl.indexOf('live/');
                     that.videoUrl=videoInfo.hlsPlayUrl.substring(0,live1Index).concat('live/');
                     that.videoName=videoInfo.hlsPlayUrl.substring(live1Index+5);
@@ -99,7 +144,7 @@ import liveHandler from 'store/liveInfo.js'
 
                       let player=new TcPlayer("movie",{
                           //"m3u8":"http://5432.liveplay.myqcloud.com/live/5432_f812bda13c8f485f83ebe7637cd9bfa0_73.m3u8",
-                          "m3u8":that.videoUrl,
+                          "m3u8":videoInfo.hlsPlayUrl,
                           "autoplayer":true,
                           "coverpic":{style:"cover",src:"http://vodplayerinfo-10005041.file.myqcloud.com/3035579109/vod_paster_pause/paster_pause1469013308.jpg"},
                           "width":"100%"
@@ -116,6 +161,7 @@ import liveHandler from 'store/liveInfo.js'
                   }
                 );
 
+         }
        },
       watch:{
       '$route':'fetchData'
@@ -136,9 +182,15 @@ import liveHandler from 'store/liveInfo.js'
     //   },
       methods:{
          fetchData:function(){ 
-           //console.log(this.$route.params);
+           console.log(this.$route.params);
            if(this.$route.params.nameId){       // 为空的时候不重新设置各种ID，比如从手机端返回，这里可能为空，因为路径跳转没有带参数
-              this.name=this.$route.params.nameId,
+              this.name=this.$route.params.nameId;
+              if(this.$route.params.type=="学术"){
+                  localStorage.setItem('type',1);
+              } 
+              if(!this.$route.params.type){
+                localStorage.setItem('type',0);
+              }
               localStorage.setItem('liveId',this.$route.params.liveId)
            } 
         },

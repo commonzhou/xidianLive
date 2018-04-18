@@ -44,7 +44,7 @@ import liveHandler from 'store/liveinfo.js'
        this.title=localStorage.getItem('liveTitle');
        var that=this;
        var channel=localStorage.getItem('channelId');
-        that.$store.state.liveList=[];
+       
        liveHandler.getLiveChannel({"channelId":channel}).then(function(res){
               if(res.data.retureValue==0){
                 console.log(res.data.retureData);
@@ -91,6 +91,7 @@ import liveHandler from 'store/liveinfo.js'
            });
         },
         fetchData:function(){
+           this.$store.state.liveList=[];
             console.log(this.$route)
             if(this.$route.params.nameId){                                       //处理f5以后，title为空的问题
                localStorage.setItem('liveTitle',this.$route.params.nameId);
@@ -100,7 +101,9 @@ import liveHandler from 'store/liveinfo.js'
             }
         },
         toLive:function(name,liveId){
-           console.log(name,liveId)
+          
+           if(liveId==null) liveId=localStorage.getItem('liveId');
+            console.log(name,liveId)
            this.$router.push({name:'viewVideo',params:{nameId:name,liveId:liveId}});
         }
       }

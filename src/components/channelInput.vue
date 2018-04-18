@@ -28,17 +28,18 @@ export default {
 
                 if(res.data.retureValue==0){
                   alert('新建成功')
+                     localStorage.setItem('channelId',res.data.retureData.channelId);
                     that.$emit("message",{name:that.name,person:that.person});
                     that.name="";               //向父组件传递参数后，清空数据框
                     that.person="";
                 }
                 else{
-                  alert("创建失败")
+                  //alert("创建失败")
                 }
                 }).catch(
                   function(err){
                     console.log(err);
-                    alert("创建失败.");
+                    //alert("创建失败.");
                   }
                 );
               

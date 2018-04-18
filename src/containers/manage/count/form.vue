@@ -1,5 +1,6 @@
 <template>
   <div class="feedback-wrapper">
+      <subTitle title="用户列表"></subTitle>
      <section class="mt30 clearfix">
        <Shelf title="直播观看人列表">
        </Shelf>
@@ -126,11 +127,13 @@
 <script>
 import Shelf from 'components/common/shelf';
 import info from 'store/liveInfo.js';
+ import subTitle from 'containers/manage/subTitle'
 import { mapMutations, mapState } from 'vuex';
   export default {
     name: 'form',
     components: {
-      Shelf
+      Shelf,
+      subTitle
     },
     mounted () {
       const TITLE_HEIGHT = 50 + 15

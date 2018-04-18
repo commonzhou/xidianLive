@@ -54,6 +54,7 @@ export default {
 
                 if(res.data.retureValue==0){
                   alert('新建成功')
+                    localStorage.setItem('liveId',res.data.retureData.liveId);
                     that.$emit("newlive",{name:that.name,location:that.location,date:that.date,time:that.time,endtime:that.timeEnd,info:that.info});
                     that.name='';
                     that.location='';

@@ -1,6 +1,7 @@
 <template>
     <div class="info_container">
         <!--个人信息栏-->
+         <subTitle title="个人中心"></subTitle>
         <el-row class="info_row row" :gutter="10">
                 <el-col :span="4">
                 <div class="area">
@@ -115,6 +116,7 @@
 </template>
 
 <script type="text/ecmascript-6">
+import subTitle from 'containers/manage/subTitle'
     export default {
         data(){
             return {
@@ -153,6 +155,9 @@
            handError(file){
            },
         },
+        components:{
+          subTitle
+        }
     }
 </script>
 

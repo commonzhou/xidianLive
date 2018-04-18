@@ -15,6 +15,9 @@ class liveInfo extends BaseModule{
   getLiveInfo(data){
       return this.post('/live/getLiveInfo',data)
   }
+  getDianboInfo(id){
+     return this.get(`/0.1/wechat/video/${id}`);
+  }
   ////////下面是手机直播观看模块
   liveDetailMobile(channelId){
     return this.get(`/video/liveDetailMobile?channelId=${channelId}`)
@@ -52,7 +55,7 @@ class liveInfo extends BaseModule{
   }
   getRandomInt () {
     return parseInt(Math.random().toString().slice(2, 10))
-
+  }
     
   // 直播\点播信息相关
   liveUserData(data){
@@ -67,6 +70,7 @@ class liveInfo extends BaseModule{
   liveCountInfo(data){
     return this.post('/statistic/getChannelAndLive',data)
   }
+  
 }
 
 export default new liveInfo();
