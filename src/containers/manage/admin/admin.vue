@@ -2,6 +2,127 @@
     <div class="info_container">
         <!--个人信息栏-->
          <subTitle title="个人中心"></subTitle>
+          <section class="mt30 clearfix">
+          <shelf title="基本信息">
+          </shelf>
+         <div id="graph1"></div>
+       
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="用户名">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="账户认证">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="手机号">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+           <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="邮箱">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+      </section>
+      
+       <section class="mt30 clearfix">
+          <shelf title="认证信息">
+          </shelf>
+         <div id="graph1"></div>
+       
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="认证类型">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="所在地区">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="详细地址">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+           <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="真实姓名">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="机构联系方式">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="机构名称">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="机构网址">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form><el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="证件类型">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         </el-form><el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="证件类型">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         </el-form><el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="证件号码">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+         </el-form><el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="证件照片">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          </el-form></el-form><el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="机构简介">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+      </section>
+       <section class="mt30 clearfix">
+          <shelf title="密码设置">
+          </shelf>
+         <div id="graph1"></div>
+       
+         <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="原密码">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="新密码">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+          <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="真实姓名">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+           <el-form ref="form" :model="form" label-width="80px">
+                    <el-form-item label="再次输入密码">
+                        <el-input v-model="form.name"></el-input>
+                    </el-form-item>
+         </el-form>
+      </section>
+
+
+
         <el-row class="info_row row" :gutter="10">
                 <el-col :span="4">
                 <div class="area">
@@ -117,9 +238,22 @@
 
 <script type="text/ecmascript-6">
 import subTitle from 'containers/manage/subTitle'
+import shelf from 'components/common/shelf'
+import videoCard from 'components/common/videoCard'
     export default {
         data(){
             return {
+                form: {
+                    name: '',
+                    region: '',
+                    date1: '',
+                    date2: '',
+                    delivery: true,
+                    type: ['步步高'],
+                    resource: '小天才',
+                    desc: '',
+                    options: []
+                },
                bandata:[
                    {url:'http://www.baidu.com',data:300},
                    {url:'http://www.sina.com',data:200},
@@ -156,12 +290,26 @@ import subTitle from 'containers/manage/subTitle'
            },
         },
         components:{
-          subTitle
+          subTitle,
+          shelf,
+          videoCard
         }
     }
 </script>
 
 <style lang="stylus" scoped rel="stylesheet/stylus">
+
+   .mt30 {
+    width:100%;
+    height:100%;
+    margin:50px auto;
+    margin-left 10px
+    margin-top 10px
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+    border-color: rgba(0, 0, 0, .14);
+    box-shadow: 0 3px 8px -6px rgba(0, 0, 0, .1);
+  }
     .info_container{
         padding: 10px;
         margin: 0 10px;
