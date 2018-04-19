@@ -1,42 +1,150 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from 'containers/index'
-import main from 'containers/main/main'
-import scene from 'components/scene/scene'
-import purchase from 'containers/manage/manageDetail/purchase'
-import livecase from 'components/livecase/livecase'
-import displayvideo from 'containers/videoDisplay/videoDisplay'
-import register from 'containers/register/register'
-import login from 'containers/login/login'
-import message from 'containers/message/message'
-import manage from 'containers/manage/manage'                    //通往管理页面
-import document from 'containers/manage/manageDetail/document'   //管理界面文档介绍
-import admin from 'containers/manage/admin/admin'                // 个人中心
-import channel from 'containers/manage/manageDetail/channel'     //管理频道，可新建频道
-import newLive from 'containers/manage/manageDetail/newLive'     //管理直播，可新建直播
-import auth from 'containers/manage/auth/auth'                   //用户组管理授权
-import authUser from 'containers/manage/auth/authUser'           //用户组内部用户管理
-import count from 'containers/manage/count/count'                //直播数据页面
-import dianbo from 'containers/manage/count/dianbo'              //点播数据页面
-import form from 'containers/manage/count/form'                  //观看直播的用户表单统计
-import mediaManage from 'containers/manage/media/media'          //管理后台界面的媒体库
-import error from 'containers/error'                             //404页面
-import viewVideo from 'components/common/viewVideo'              //视频pc端播放
-import viewMobile from 'components/common/viewMobile'            //视频手机端播放
 
+const Index = (resolve)=>{
+  import('@/containers/index').then((module)=>{
+    resolve(module);
+  });
+}
 
+const main =(resolve)=>{
+   import('@/containers/main/main').then((module)=>{
+     resolve(module);
+   });
+}
+const scene =(resolve)=>{
+  import('@/components/scene/scene').then((module)=>{
+    resolve(module);
+  });
+}
+const purchase =(resolve)=>{
+  import('@/containers/manage/manageDetail/purchase').then((module)=>{
+    resolve(module);
+  });
+}
+const livecase =(resolve)=>{
+  import('@/components/livecase/livecase').then((module)=>{
+    resolve(module);
+  });
+}
+const displayvideo =(resolve)=>{
+  import('@/containers/videoDisplay/videoDisplay').then((module)=>{
+    resolve(module);
+  });
+}
+const register =(resolve)=>{
+  import('@/containers/register/register').then((module)=>{
+    resolve(module);
+  });
+}
+const login =(resolve)=>{
+  import('@/containers/login/login').then((module)=>{
+    resolve(module);
+  });
+}
+const message =(resolve)=>{
+  import('@/containers/message/message').then((module)=>{
+    resolve(module);
+  });
+}
+const manage =(resolve)=>{                                //通往管理页面
+  import('@/containers/manage/manage').then((module)=>{
+    resolve(module);
+  });
+}
 
-import newbuild from 'components/afterlogin/newbuild/newbuild'
-import media from 'components/afterlogin/media/media'
+const document =(resolve)=>{                             //管理界面文档介绍
+  import('@/containers/manage/manageDetail/document').then((module)=>{
+    resolve(module);
+  });
+}
+const admin =(resolve)=>{                               // 个人中心
+  import('@/containers/manage/admin/admin').then((module)=>{
+    resolve(module);
+  });
+}
+const channel =(resolve)=>{                             //管理频道，可新建频道
+  import('@/containers/manage/manageDetail/channel').then((module)=>{
+    resolve(module);
+  });
+}
+const newLive =(resolve)=>{                               //管理直播，可新建直播
+  import('@/containers/manage/manageDetail/newLive').then((module)=>{
+    resolve(module);
+  });
+}
+const auth =(resolve)=>{                             //用户组管理授权
+  import('@/containers/manage/auth/auth').then((module)=>{
+    resolve(module);
+  });
+}
+const authUser =(resolve)=>{                             //用户组内部用户管理
+  import('@/containers/manage/auth/authUser').then((module)=>{
+    resolve(module);
+  });
+}
+const count =(resolve)=>{                             //直播数据页面
+  import('@/containers/manage/count/count').then((module)=>{
+    resolve(module);
+  });
+}
+const dianbo =(resolve)=>{                              //点播数据页面
+  import('@/containers/manage/count/dianbo').then((module)=>{
+    resolve(module);
+  });
+}
+const form =(resolve)=>{                             //观看直播的用户表单统计
+  import('@/containers/manage/count/form').then((module)=>{
+    resolve(module);
+  });
+}
+const mediaManage =(resolve)=>{                             //管理后台界面的媒体库
+  import('@/containers/manage/media/media').then((module)=>{
+    resolve(module);
+  });
+}
+
+const error =(resolve)=>{                             //404页面
+  import('@/containers/error').then((module)=>{
+    resolve(module);
+  });
+}
+const viewVideo =(resolve)=>{                             //视频pc端播放
+  import('@/components/common/viewVideo').then((module)=>{
+    resolve(module);
+  });
+}
+const viewMobile =(resolve)=>{                            //视频手机端播放
+  import('@/components/common/viewMobile').then((module)=>{
+    resolve(module);
+  });
+}
+const newbuild =(resolve)=>{                             //
+  import('@/components/afterlogin/newbuild/newbuild').then((module)=>{
+    resolve(module);
+  });
+}
+const media =(resolve)=>{                             //
+  import('@/components/afterlogin/media/media').then((module)=>{
+    resolve(module);
+  });
+}
+const subvideo =(resolve)=>{                             //
+  import('@/containers/videoDisplay/subvideoDisplay').then((module)=>{
+    resolve(module);
+  });
+}
+const playvideo =(resolve)=>{                             //
+  import('@/containers/videoDisplay/playVideo').then((module)=>{
+    resolve(module);
+  });
+}                    
 
 import personal from 'components/afterlogin/personnal/personal'
 import channel1 from 'components/afterlogin/newbuild/channel1'
 import livepc from 'components/afterlogin/newbuild/livepc'
 import livemobile from 'components/afterlogin/newbuild/livemobile'
 import livemobilelarge from 'components/afterlogin/newbuild/livemobilelarge'
-
-import subvideo from 'containers/videoDisplay/subvideoDisplay'
-import playvideo from 'containers/videoDisplay/playVideo'
 
 Vue.use(Router)
 
