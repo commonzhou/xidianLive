@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
+//  路由懒加载，生活美滋滋
+
 const Index = (resolve)=>{
   import('@/containers/index').then((module)=>{
     resolve(module);
